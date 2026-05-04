@@ -1,0 +1,95 @@
+/**
+ * LeetCode 206 - Reverse Linked List
+ *
+ * 문제: 단일 연결 리스트를 뒤집어 새로운 head를 반환한다.
+ *
+ * --- 인터페이스 ---
+ *   ListNode reverseList(ListNode head)
+ *
+ * --- 시간복잡도 목표 ---
+ *   시간 O(N), 공간 O(1) (반복문 버전)
+ *
+ * --- 핵심 아이디어 (수도코드) ---
+ *   세 개의 포인터(prev, curr, next)를 사용한 반복 방식.
+ *
+ *   prev = null
+ *   curr = head
+ *   while curr != null:
+ *     next = curr.next     // 다음 노드 저장
+ *     curr.next = prev     // 방향 뒤집기
+ *     prev = curr          // 한 칸 전진
+ *     curr = next
+ *   return prev
+ *
+ *   재귀 버전:
+ *     reverse(head):
+ *       if head == null or head.next == null: return head
+ *       newHead = reverse(head.next)
+ *       head.next.next = head
+ *       head.next = null
+ *       return newHead
+ *
+ * --- 불변식 ---
+ *   매 반복 직후, prev는 지금까지 뒤집힌 부분 리스트의 head.
+ *
+ * --- 함정 ---
+ *   - curr.next를 먼저 저장하지 않으면 다음으로 갈 수 없다.
+ *   - 마지막에 head.next = null 처리를 잊으면 사이클 발생 가능 (재귀 버전).
+ */
+class ReverseLinkedList {
+
+    private static class ListNode {
+        int val;
+        ListNode next;
+        ListNode(int v) { val = v; }
+    }
+
+    static class Solution {
+        public ListNode reverseList(ListNode head) {
+            // TODO
+            return null;
+        }
+    }
+
+    // 헬퍼: 배열 → 리스트
+    private static ListNode build(int[] arr) {
+        ListNode dummy = new ListNode(0);
+        ListNode cur = dummy;
+        for (int v : arr) {
+            cur.next = new ListNode(v);
+            cur = cur.next;
+        }
+        return dummy.next;
+    }
+
+    // 헬퍼: 리스트 → 배열
+    private static int[] toArray(ListNode head) {
+        int n = 0;
+        for (ListNode p = head; p != null; p = p.next) n++;
+        int[] arr = new int[n];
+        int i = 0;
+        for (ListNode p = head; p != null; p = p.next) arr[i++] = p.val;
+        return arr;
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+
+        ListNode r1 = sol.reverseList(build(new int[]{1, 2, 3, 4, 5}));
+        int[] a1 = toArray(r1);
+        assert java.util.Arrays.equals(a1, new int[]{5, 4, 3, 2, 1}) : "reverse 12345";
+
+        ListNode r2 = sol.reverseList(build(new int[]{1, 2}));
+        assert java.util.Arrays.equals(toArray(r2), new int[]{2, 1}) : "reverse 12";
+
+        // 빈 리스트
+        ListNode r3 = sol.reverseList(null);
+        assert r3 == null : "reverse null should be null";
+
+        // 단일 노드
+        ListNode r4 = sol.reverseList(build(new int[]{7}));
+        assert java.util.Arrays.equals(toArray(r4), new int[]{7}) : "single node";
+
+        System.out.println("✅ ReverseLinkedList: All tests passed");
+    }
+}

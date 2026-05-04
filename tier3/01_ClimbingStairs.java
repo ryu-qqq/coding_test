@@ -1,0 +1,53 @@
+/**
+ * LeetCode 70 - Climbing Stairs
+ *
+ * 문제: n번째 계단까지 오르는 방법의 수. 한 번에 1 또는 2 계단을 오를 수 있다.
+ *
+ * --- 인터페이스 ---
+ *   int climbStairs(int n)
+ *
+ * --- 시간복잡도 목표 ---
+ *   시간 O(N), 공간 O(1)  (rolling 두 변수)
+ *
+ * --- 핵심 아이디어 (수도코드) ---
+ *   본질이 피보나치: f(n) = f(n-1) + f(n-2), f(1) = 1, f(2) = 2.
+ *
+ *   if n <= 2: return n
+ *   prev2 = 1; prev1 = 2
+ *   for i in 3..n:
+ *     cur = prev1 + prev2
+ *     prev2 = prev1
+ *     prev1 = cur
+ *   return prev1
+ *
+ *   대안: dp 배열로 풀어도 되지만 공간 O(1)로 줄이는 것이 자연.
+ *
+ * --- 불변식 ---
+ *   매 반복 직전 prev2 = f(i-2), prev1 = f(i-1).
+ *
+ * --- 함정 ---
+ *   - n=1, n=2 같은 base case 분기 처리.
+ *   - n이 매우 커도 int 안에 들어가는지(LC는 n <= 45 정도) 확인.
+ */
+class ClimbingStairs {
+
+    static class Solution {
+        public int climbStairs(int n) {
+            // TODO: 피보나치 점화식, 두 변수 rolling
+            return 0;
+        }
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+
+        assert sol.climbStairs(1) == 1 : "n=1 → 1";
+        assert sol.climbStairs(2) == 2 : "n=2 → 2";
+        assert sol.climbStairs(3) == 3 : "n=3 → 3";
+        assert sol.climbStairs(4) == 5 : "n=4 → 5";
+        assert sol.climbStairs(5) == 8 : "n=5 → 8";
+        assert sol.climbStairs(10) == 89 : "n=10 → 89";
+
+        System.out.println("✅ ClimbingStairs: All tests passed");
+    }
+}

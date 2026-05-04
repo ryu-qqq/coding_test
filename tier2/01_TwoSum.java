@@ -1,0 +1,63 @@
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * LeetCode 1 - Two Sum
+ *
+ * 문제: nums 배열에서 합이 target이 되는 두 인덱스 쌍을 찾아 반환한다.
+ *   정확히 한 쌍의 답이 존재한다고 가정.
+ *
+ * --- 인터페이스 ---
+ *   int[] twoSum(int[] nums, int target)
+ *
+ * --- 시간복잡도 목표 ---
+ *   시간 O(N), 공간 O(N)  (HashMap one-pass)
+ *
+ * --- 핵심 아이디어 (수도코드) ---
+ *   "보수(complement) = target - nums[i]" 가 이전에 본 수 중에 있는지 HashMap으로 확인.
+ *
+ *   map = {}            // value → index
+ *   for i in 0..n-1:
+ *     comp = target - nums[i]
+ *     if comp in map: return [map[comp], i]
+ *     map[nums[i]] = i
+ *
+ * --- 불변식 ---
+ *   map은 "현재 i 직전까지의 (값 → 인덱스)" 매핑을 정확히 반영.
+ *
+ * --- 함정 ---
+ *   - 자기 자신을 두 번 사용하면 안 됨 → 먼저 lookup 후에 put.
+ *   - 동일 값이 두 번 등장해 답이 되는 경우(예: [3,3], target 6)는 위 순서로 자연 처리됨.
+ */
+class TwoSum {
+
+    static class Solution {
+        public int[] twoSum(int[] nums, int target) {
+            // TODO: HashMap one-pass
+            return new int[]{-1, -1};
+        }
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+
+        int[] r1 = sol.twoSum(new int[]{2, 7, 11, 15}, 9);
+        // [0, 1] 순서이거나 [1, 0] 순서일 수 있음 → 둘 다 허용
+        assert (r1[0] == 0 && r1[1] == 1) || (r1[0] == 1 && r1[1] == 0) : "case1";
+
+        int[] r2 = sol.twoSum(new int[]{3, 2, 4}, 6);
+        assert (r2[0] == 1 && r2[1] == 2) || (r2[0] == 2 && r2[1] == 1) : "case2";
+
+        int[] r3 = sol.twoSum(new int[]{3, 3}, 6);
+        assert (r3[0] == 0 && r3[1] == 1) || (r3[0] == 1 && r3[1] == 0) : "duplicate";
+
+        int[] r4 = sol.twoSum(new int[]{-1, -2, -3, -4, -5}, -8);
+        assert (r4[0] + r4[1] == 5) : "negatives, indices sum to 5 (2+3)";
+
+        // 사용하지 않더라도 import 검증
+        Map<Integer, Integer> _u = new HashMap<>();
+        _u.put(0, 0);
+
+        System.out.println("✅ TwoSum: All tests passed");
+    }
+}

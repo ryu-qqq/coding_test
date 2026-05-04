@@ -1,0 +1,76 @@
+/**
+ * LeetCode 100 - Same Tree
+ *
+ * 문제: 두 이진 트리가 구조와 값 모두 동일한지 판별한다.
+ *
+ * --- 인터페이스 ---
+ *   boolean isSameTree(TreeNode p, TreeNode q)
+ *
+ * --- 시간복잡도 목표 ---
+ *   시간 O(N), 공간 O(H)
+ *
+ * --- 핵심 아이디어 (수도코드) ---
+ *   재귀로 동시에 두 트리를 같은 위치까지 따라간다.
+ *
+ *   isSame(p, q):
+ *     if p == null and q == null: return true
+ *     if p == null or  q == null: return false   // 한쪽만 null
+ *     if p.val != q.val:           return false
+ *     return isSame(p.left, q.left) and isSame(p.right, q.right)
+ *
+ * --- 불변식 ---
+ *   재귀 호출 시점에서 p, q는 항상 두 트리의 "같은 좌표"에 있는 노드.
+ *
+ * --- 함정 ---
+ *   - null 체크 순서: 둘 다 null → true 가 가장 먼저, 그 후 한쪽 null 체크.
+ *   - 값만 비교하고 구조 비교를 빼먹는 경우 (구조가 다르면 한쪽 null 케이스에서 잡힘).
+ */
+class SameTree {
+
+    private static class TreeNode {
+        int val;
+        TreeNode left, right;
+        TreeNode(int v) { val = v; }
+    }
+
+    static class Solution {
+        public boolean isSameTree(TreeNode p, TreeNode q) {
+            // TODO
+            return false;
+        }
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+
+        // 동일 트리: [1,2,3] vs [1,2,3]
+        TreeNode p1 = new TreeNode(1);
+        p1.left = new TreeNode(2);
+        p1.right = new TreeNode(3);
+        TreeNode q1 = new TreeNode(1);
+        q1.left = new TreeNode(2);
+        q1.right = new TreeNode(3);
+        assert sol.isSameTree(p1, q1) : "should be same";
+
+        // 구조 다름: [1,2] vs [1,null,2]
+        TreeNode p2 = new TreeNode(1);
+        p2.left = new TreeNode(2);
+        TreeNode q2 = new TreeNode(1);
+        q2.right = new TreeNode(2);
+        assert !sol.isSameTree(p2, q2) : "structure differs";
+
+        // 값 다름
+        TreeNode p3 = new TreeNode(1);
+        p3.left = new TreeNode(2);
+        p3.right = new TreeNode(1);
+        TreeNode q3 = new TreeNode(1);
+        q3.left = new TreeNode(1);
+        q3.right = new TreeNode(2);
+        assert !sol.isSameTree(p3, q3) : "values differ";
+
+        // 둘 다 null
+        assert sol.isSameTree(null, null) : "both null";
+
+        System.out.println("✅ SameTree: All tests passed");
+    }
+}
