@@ -10,25 +10,8 @@
  *   기본: O(N^2) DP
  *   고급: O(N log N) patience sort + binary search
  *
- * --- 핵심 아이디어 (수도코드) ---
- *   1) O(N^2) DP:
- *        dp[i] = nums[i]를 마지막으로 끝나는 LIS의 길이
- *        dp[i] = 1 + max{ dp[j] | j < i, nums[j] < nums[i] }   (없으면 1)
- *        return max(dp)
- *
- *      for i in 0..n-1:
- *        dp[i] = 1
- *        for j in 0..i-1:
- *          if nums[j] < nums[i]:
- *            dp[i] = max(dp[i], dp[j] + 1)
- *
- *   2) O(N log N) "patience sort":
- *        tails 배열을 유지 (tails[k] = 길이 k+1 LIS의 가능한 가장 작은 마지막 값).
- *        각 num을 lower_bound로 tails에 위치시킴.
- *        - 발견된 위치가 tails 끝이면 append (LIS 길이 +1).
- *        - 그렇지 않으면 그 위치를 num으로 덮어씀.
- *        결과: tails.size() = LIS 길이.
- *        주의: tails는 실제 LIS의 시퀀스가 아님(길이만 정답).
+ * --- 핵심 아이디어 ---
+ *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
  *   DP: dp[i]가 채워진 직후, "i를 끝으로 하는 LIS"는 dp[i] 길이.

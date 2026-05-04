@@ -14,21 +14,8 @@ import java.util.PriorityQueue;
  *   findMedian: O(1)
  *   공간       : O(N)
  *
- * --- 핵심 아이디어 (수도코드) ---
- *   두 개의 힙을 이용한다.
- *   - lo : 최대 힙 (작은 절반)
- *   - hi : 최소 힙 (큰 절반)
- *   불변식: 0 <= lo.size() - hi.size() <= 1
- *
- *   addNum(num):
- *     lo.offer(num)              // 일단 작은 쪽에 넣고
- *     hi.offer(lo.poll())        // 가장 큰 값을 큰 쪽에 보냄 (정렬 보장)
- *     if hi.size() > lo.size():  // 균형 맞춤
- *       lo.offer(hi.poll())
- *
- *   findMedian():
- *     if lo.size() > hi.size(): return lo.top() as double
- *     else:                     return (lo.top() + hi.top()) / 2.0
+ * --- 핵심 아이디어 ---
+ *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
  *   - lo의 모든 원소 ≤ hi의 모든 원소.

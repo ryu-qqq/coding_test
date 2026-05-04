@@ -9,19 +9,8 @@
  * --- 시간복잡도 목표 ---
  *   시간 O(N + M), 공간 O(1) (반복 버전)
  *
- * --- 핵심 아이디어 (수도코드) ---
- *   더미 헤드(dummy)를 두고 tail 포인터로 한 노드씩 붙여 나간다.
- *
- *   dummy = new node
- *   tail = dummy
- *   while l1 != null and l2 != null:
- *     if l1.val <= l2.val:
- *       tail.next = l1; l1 = l1.next
- *     else:
- *       tail.next = l2; l2 = l2.next
- *     tail = tail.next
- *   tail.next = (l1 != null ? l1 : l2)   // 남은 부분 그대로 연결
- *   return dummy.next
+ * --- 핵심 아이디어 ---
+ *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
  *   매 반복 시점에서 dummy.next ~ tail 까지는 정렬된 상태로 유지된다.

@@ -13,20 +13,8 @@ import java.util.Deque;
  *   push: O(1)
  *   pop/peek: amortized O(1)  ← 핵심 면접 포인트
  *
- * --- 핵심 아이디어 (수도코드) ---
- *   inStack:  push 전용 (최신 원소가 top)
- *   outStack: pop/peek 전용 (가장 오래된 원소가 top)
- *
- *   push(x):
- *     inStack.push(x)
- *
- *   pop()/peek():
- *     if outStack 비었으면:
- *       inStack의 모든 원소를 outStack으로 옮긴다 (역순됨 → FIFO 성립)
- *     return outStack.pop()/peek()
- *
- *   empty():
- *     return inStack.empty() && outStack.empty()
+ * --- 핵심 아이디어 ---
+ *   (스스로 떠올려볼 것)
  *
  * --- Amortized 분석 ---
  *   각 원소는 inStack에 1번 push, outStack으로 1번 이동, outStack에서 1번 pop
@@ -38,42 +26,27 @@ import java.util.Deque;
  */
 class QueueUsingTwoStacks {
 
-    private final Deque<Integer> inStack;
-    private final Deque<Integer> outStack;
-
     public QueueUsingTwoStacks() {
-        inStack =  new ArrayDeque<>();
-        outStack = new ArrayDeque<>();
+        // TODO: 자료구조 초기화
     }
 
     public void push(int x) {
-        inStack.push(x);
+        // TODO
     }
 
     public int pop() {
-        extracted();
-        Integer pop = outStack.pop();
-        return pop != null ? pop : 0;
+        // TODO
+        return 0;
     }
 
     public int peek() {
-        extracted();
-        Integer peek = outStack.peek();
-        return peek != null ? peek : 0;
+        // TODO
+        return 0;
     }
-
 
     public boolean empty() {
-        return inStack.isEmpty() && outStack.isEmpty();
-
-    }
-
-    private void extracted() {
-        if(outStack.isEmpty()){
-            while(!inStack.isEmpty()){
-                outStack.push(inStack.pop());
-            }
-        }
+        // TODO
+        return true;
     }
 
     public static void main(String[] args) {

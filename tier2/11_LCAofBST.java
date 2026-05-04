@@ -9,17 +9,8 @@
  * --- 시간복잡도 목표 ---
  *   시간 O(H) (BST 높이), 공간 O(1) (반복) 또는 O(H) (재귀)
  *
- * --- 핵심 아이디어 (수도코드) ---
- *   BST 성질을 이용한다.
- *   - p.val, q.val 둘 다 root.val 보다 작으면 → 왼쪽 서브트리로 이동
- *   - 둘 다 root.val 보다 크면 → 오른쪽 서브트리로 이동
- *   - 그 외 (p와 q가 root를 사이에 두거나, 한 쪽이 root와 같음) → root가 LCA
- *
- *   반복:
- *     while root != null:
- *       if p.val < root.val and q.val < root.val: root = root.left
- *       elif p.val > root.val and q.val > root.val: root = root.right
- *       else: return root
+ * --- 핵심 아이디어 ---
+ *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
  *   루프 진입 시점의 root는 "p, q를 모두 포함하는 가장 낮은 가능 후보"이다.

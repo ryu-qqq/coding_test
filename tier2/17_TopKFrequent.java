@@ -14,21 +14,8 @@ import java.util.PriorityQueue;
  *   해시 + 힙: O(N log K)
  *   해시 + 버킷 정렬: O(N)  (인덱스 = 빈도)
  *
- * --- 핵심 아이디어 (수도코드) ---
- *   1) 빈도 카운트:
- *        freq = HashMap<Integer, Integer>
- *        for v in nums: freq[v]++
- *
- *   2) 해시 + 최소 힙(O(N log K)):
- *        heap = min-heap by frequency, size limit = k
- *        for (val, cnt) in freq:
- *          heap.offer((cnt, val))
- *          if heap.size() > k: heap.poll()
- *        결과 = heap의 val들
- *
- *   3) 버킷 정렬 (O(N)):
- *        buckets[i] = "i번 등장한 값들의 리스트", i in 0..N
- *        뒤(=빈도 큰 쪽)부터 K개 채워서 반환.
+ * --- 핵심 아이디어 ---
+ *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
  *   힙 방식: 매 반복 후 heap에는 "현재까지 본 값들 중 빈도 상위 ≤ K개"가 들어 있다.

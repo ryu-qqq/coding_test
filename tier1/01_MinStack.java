@@ -12,22 +12,8 @@ import java.util.Deque;
  * --- 시간복잡도 목표 ---
  *   모든 연산 O(1)
  *
- * --- 핵심 아이디어 (수도코드) ---
- *   메인 스택 외에 보조 스택(minStack)을 둔다.
- *   minStack의 top은 "현재 시점에서의 최솟값"을 항상 가리킨다.
- *
- *   push(val):
- *     mainStack.push(val)
- *     if minStack 비었거나 val <= minStack.top():
- *       minStack.push(val)
- *
- *   pop():
- *     popped = mainStack.pop()
- *     if popped == minStack.top():
- *       minStack.pop()
- *
- *   top():     return mainStack.top()
- *   getMin():  return minStack.top()
+ * --- 핵심 아이디어 ---
+ *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
  *   minStack.top()은 항상 mainStack에 현재 살아있는 모든 원소의 최솟값.
@@ -38,41 +24,25 @@ import java.util.Deque;
  */
 class MinStack {
 
-    private final Deque<Integer> mainStack;
-    private final Deque<Integer> minStack;
-
     public MinStack() {
-        mainStack = new ArrayDeque<>();
-        minStack = new ArrayDeque<>();
+        // TODO: 자료구조 초기화
     }
 
     public void push(int val) {
-        mainStack.push(val);
-
-        if(minStack.isEmpty() || val <= minStack.peek()){
-            minStack.push(val);
-        }
+        // TODO
     }
 
     public void pop() {
-        Integer pop = mainStack.pop();
-
-        if(pop.equals(minStack.peek())){
-            minStack.pop();
-        }
+        // TODO
     }
 
     public int top() {
-        if(!mainStack.isEmpty()){
-            return mainStack.peek();
-        }
+        // TODO
         return 0;
     }
 
     public int getMin() {
-        if(!minStack.isEmpty()){
-            return minStack.peek();
-        }
+        // TODO
         return 0;
     }
 

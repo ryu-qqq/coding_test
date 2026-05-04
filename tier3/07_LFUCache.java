@@ -11,43 +11,8 @@
  * --- 시간복잡도 목표 ---
  *   get/put 모두 O(1)  ← LRU보다 훨씬 어려움
  *
- * --- 핵심 아이디어 (수도코드) ---
- *   세 가지 자료구조 조합:
- *     keyToNode:   HashMap<key, Node>          (Node = {key, value, freq})
- *     freqToList:  HashMap<freq, DLL<Node>>    (각 빈도별 LRU 리스트)
- *     minFreq:     int                          (현재 살아있는 최소 빈도)
- *
- *   get(key):
- *     if !keyToNode.contains(key): return -1
- *     node = keyToNode.get(key)
- *     bumpFreq(node)
- *     return node.value
- *
- *   put(key, value):
- *     if capacity == 0: return
- *     if keyToNode.contains(key):
- *       node = keyToNode.get(key)
- *       node.value = value
- *       bumpFreq(node)
- *       return
- *     if size == capacity:
- *       // 가장 적게 쓰인 빈도의 DLL에서 가장 오래된 것 제거
- *       victim = freqToList[minFreq].removeTail()
- *       keyToNode.remove(victim.key)
- *       size--
- *     node = new Node(key, value, freq=1)
- *     keyToNode.put(key, node)
- *     freqToList[1].addToHead(node)
- *     minFreq = 1                  // ← 새 노드 들어오면 항상 1로 리셋
- *     size++
- *
- *   bumpFreq(node):
- *     oldFreq = node.freq
- *     freqToList[oldFreq].remove(node)
- *     if freqToList[oldFreq].isEmpty() and minFreq == oldFreq:
- *       minFreq++           // ← 더 작은 빈도가 없을 때만 증가
- *     node.freq++
- *     freqToList[node.freq].addToHead(node)
+ * --- 핵심 아이디어 ---
+ *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
  *   - 모든 freqToList[f]의 노드들은 freq == f

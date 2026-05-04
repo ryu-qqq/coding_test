@@ -15,20 +15,8 @@ import java.util.PriorityQueue;
  *   add : O(log K)
  *   공간 : O(K)
  *
- * --- 핵심 아이디어 (수도코드) ---
- *   크기 K짜리 최소 힙(min-heap)을 유지한다.
- *   힙의 top()이 항상 "현재 K번째로 큰 값"이다.
- *
- *   생성자:
- *     for v in nums: add(v)
- *
- *   add(val):
- *     heap.offer(val)
- *     if heap.size() > k: heap.poll()      // 가장 작은 것 제거
- *     return heap.peek()
- *
- *   왜 min-heap?
- *     - 크기 K로 유지하면 top이 K개 중 가장 작은 = 전체에서 K번째로 큰 값.
+ * --- 핵심 아이디어 ---
+ *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
  *   add 종료 직후 heap.size() == min(k, 지금까지 들어온 원소 수).

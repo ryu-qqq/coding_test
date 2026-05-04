@@ -11,32 +11,8 @@
  * --- 시간복잡도 목표 ---
  *   모든 연산 amortized O(1)
  *
- * --- 핵심 아이디어 (수도코드) ---
- *   고정 버킷 배열 + 체이닝 (LinkedList of Entry)
- *
- *   class Entry { int key, value; Entry next; }
- *
- *   bucket(key) = (key % capacity + capacity) % capacity   // 음수 방어
- *
- *   put(k, v):
- *     b = buckets[bucket(k)]
- *     for entry in b:
- *       if entry.key == k:
- *         entry.value = v
- *         return
- *     b.add(new Entry(k, v))     // 또는 head insertion
- *
- *   get(k):
- *     for entry in buckets[bucket(k)]:
- *       if entry.key == k: return entry.value
- *     return -1
- *
- *   remove(k):
- *     buckets[bucket(k)] 에서 key가 k인 엔트리 제거
- *
- * --- 도전 과제 ---
- *   load factor 기반 resize:
- *     size / capacity > 0.75 → 2배 확장 + 모든 원소 rehash
+ * --- 핵심 아이디어 ---
+ *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
  *   같은 key는 한 번만 존재한다 (덮어쓰기).

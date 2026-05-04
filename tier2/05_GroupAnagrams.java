@@ -14,17 +14,8 @@ import java.util.List;
  *   카운트 키 방식: O(N * K)
  *   공간 O(N * K)
  *
- * --- 핵심 아이디어 (수도코드) ---
- *   같은 애너그램은 정렬한 결과가 같다는 점을 이용.
- *
- *   map = {}                   // key(String) → list<String>
- *   for s in strs:
- *     key = sorted(s)          // 또는 길이 26 카운트 배열을 문자열화
- *     map[key].add(s)
- *   return map.values()
- *
- *   대안 (소문자만 가정 시):
- *     int[26] count; "#a#b#..." 같은 형태로 직렬화해 키로 사용 → O(K).
+ * --- 핵심 아이디어 ---
+ *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
  *   매 반복 후 map[key]에 들어 있는 문자열들은 모두 서로 애너그램.

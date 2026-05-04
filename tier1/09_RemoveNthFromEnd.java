@@ -9,19 +9,8 @@
  * --- 시간복잡도 목표 ---
  *   시간 O(L) (한 번의 패스), 공간 O(1)
  *
- * --- 핵심 아이디어 (수도코드) ---
- *   더미 헤드 + 두 포인터(fast, slow) 기법.
- *   fast를 먼저 n+1만큼 전진시킨 뒤, slow와 fast를 같이 끝까지 이동시키면
- *   slow는 "삭제할 노드의 직전"에 위치한다.
- *
- *   dummy = new node; dummy.next = head
- *   fast = dummy; slow = dummy
- *   for i in 1..n+1: fast = fast.next   // 간격을 n+1로
- *   while fast != null:
- *     fast = fast.next
- *     slow = slow.next
- *   slow.next = slow.next.next          // 삭제
- *   return dummy.next
+ * --- 핵심 아이디어 ---
+ *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
  *   while 루프 시작 시 fast와 slow의 간격은 정확히 n+1 노드이다.

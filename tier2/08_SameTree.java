@@ -9,14 +9,8 @@
  * --- 시간복잡도 목표 ---
  *   시간 O(N), 공간 O(H)
  *
- * --- 핵심 아이디어 (수도코드) ---
- *   재귀로 동시에 두 트리를 같은 위치까지 따라간다.
- *
- *   isSame(p, q):
- *     if p == null and q == null: return true
- *     if p == null or  q == null: return false   // 한쪽만 null
- *     if p.val != q.val:           return false
- *     return isSame(p.left, q.left) and isSame(p.right, q.right)
+ * --- 핵심 아이디어 ---
+ *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
  *   재귀 호출 시점에서 p, q는 항상 두 트리의 "같은 좌표"에 있는 노드.

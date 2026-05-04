@@ -9,17 +9,8 @@
  * --- 시간복잡도 목표 ---
  *   시간 O(N), 공간 O(H)
  *
- * --- 핵심 아이디어 (수도코드) ---
- *   재귀:
- *     invert(node):
- *       if node == null: return null
- *       left  = invert(node.left)
- *       right = invert(node.right)
- *       node.left  = right
- *       node.right = left
- *       return node
- *
- *   반복(BFS): 큐에 넣고 매 노드마다 자식 swap.
+ * --- 핵심 아이디어 ---
+ *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
  *   재귀 종료 시 해당 서브트리는 좌우 거울 상태가 되어 있다.

@@ -10,19 +10,8 @@
  * --- 시간복잡도 목표 ---
  *   시간 O(amount * len(coins)), 공간 O(amount)
  *
- * --- 핵심 아이디어 (수도코드) ---
- *   bottom-up DP.
- *   dp[a] = a 만들기 위한 최소 동전 수, 초기값 amount+1 (도달 불가 표식).
- *   dp[0] = 0.
- *   점화식: dp[a] = min over c in coins (a-c >= 0) { dp[a-c] + 1 }
- *
- *   for a in 1..amount:
- *     for c in coins:
- *       if c <= a:
- *         dp[a] = min(dp[a], dp[a-c] + 1)
- *   return dp[amount] > amount ? -1 : dp[amount]
- *
- *   대안: BFS로 amount → 0 으로 가는 최단 거리.
+ * --- 핵심 아이디어 ---
+ *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
  *   dp[a]가 채워진 시점에서, 그 값은 "지금까지 고려한 동전들로 a를 만드는 최소 개수".

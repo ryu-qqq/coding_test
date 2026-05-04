@@ -14,23 +14,8 @@
  *   get / addAtIndex / deleteAtIndex : O(N)
  *   addAtHead / addAtTail            : O(1) (tail 포인터 유지 시)
  *
- * --- 핵심 아이디어 (수도코드) ---
- *   더미 헤드(dummy)를 두면 head가 바뀌는 케이스(insert/delete at 0)를 일관되게 처리할 수 있다.
- *   size 변수를 별도로 유지해 인덱스 검사를 빠르게 한다.
- *
- *   addAtIndex(index, val):
- *     if index < 0 → index = 0
- *     if index > size → return (무시)
- *     prev = dummy
- *     for i in 0..index-1: prev = prev.next
- *     newNode.next = prev.next
- *     prev.next = newNode
- *     size++
- *
- *   deleteAtIndex(index):
- *     if index 범위 밖이면 무시
- *     prev까지 이동 후 prev.next = prev.next.next
- *     size--
+ * --- 핵심 아이디어 ---
+ *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
  *   - dummy.next 부터 size개의 노드가 정확히 존재한다.

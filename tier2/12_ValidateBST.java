@@ -12,18 +12,8 @@
  * --- 시간복잡도 목표 ---
  *   시간 O(N), 공간 O(H)
  *
- * --- 핵심 아이디어 (수도코드) ---
- *   1) 범위(range)를 내려주는 재귀:
- *     validate(node, lower, upper):
- *       if node == null: return true
- *       if node.val <= lower or node.val >= upper: return false
- *       return validate(node.left,  lower, node.val)
- *           and validate(node.right, node.val, upper)
- *
- *     초기: validate(root, -infinity, +infinity)
- *
- *   2) In-order 순회 결과가 strictly 증가하는지 검사하는 방법.
- *      prev 변수를 들고 다니며 prev >= curr.val 이면 false.
+ * --- 핵심 아이디어 ---
+ *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
  *   범위 방식: 재귀 진입 시 node의 값은 (lower, upper) 범위 안에 들어야 한다.

@@ -14,22 +14,8 @@ import java.util.List;
  * --- 시간복잡도 목표 ---
  *   시간 O(N), 공간 O(N)
  *
- * --- 핵심 아이디어 (수도코드) ---
- *   큐를 이용한 BFS. 매 레벨마다 큐 크기만큼만 꺼내 한 묶음으로 처리.
- *
- *   if root == null: return []
- *   q = queue with [root]
- *   result = []
- *   while q not empty:
- *     levelSize = q.size()
- *     level = []
- *     for i in 0..levelSize-1:
- *       node = q.poll()
- *       level.add(node.val)
- *       if node.left  != null: q.offer(node.left)
- *       if node.right != null: q.offer(node.right)
- *     result.add(level)
- *   return result
+ * --- 핵심 아이디어 ---
+ *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
  *   매 while 반복 진입 시점에 큐에는 "현재 레벨"의 노드들만 들어 있다.

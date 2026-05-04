@@ -13,14 +13,8 @@ import java.util.Map;
  * --- 시간복잡도 목표 ---
  *   시간 O(N), 공간 O(N)  (HashMap one-pass)
  *
- * --- 핵심 아이디어 (수도코드) ---
- *   "보수(complement) = target - nums[i]" 가 이전에 본 수 중에 있는지 HashMap으로 확인.
- *
- *   map = {}            // value → index
- *   for i in 0..n-1:
- *     comp = target - nums[i]
- *     if comp in map: return [map[comp], i]
- *     map[nums[i]] = i
+ * --- 핵심 아이디어 ---
+ *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
  *   map은 "현재 i 직전까지의 (값 → 인덱스)" 매핑을 정확히 반영.

@@ -9,25 +9,8 @@
  * --- 시간복잡도 목표 ---
  *   시간 O(N), 공간 O(1) (반복문 버전)
  *
- * --- 핵심 아이디어 (수도코드) ---
- *   세 개의 포인터(prev, curr, next)를 사용한 반복 방식.
- *
- *   prev = null
- *   curr = head
- *   while curr != null:
- *     next = curr.next     // 다음 노드 저장
- *     curr.next = prev     // 방향 뒤집기
- *     prev = curr          // 한 칸 전진
- *     curr = next
- *   return prev
- *
- *   재귀 버전:
- *     reverse(head):
- *       if head == null or head.next == null: return head
- *       newHead = reverse(head.next)
- *       head.next.next = head
- *       head.next = null
- *       return newHead
+ * --- 핵심 아이디어 ---
+ *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
  *   매 반복 직후, prev는 지금까지 뒤집힌 부분 리스트의 head.

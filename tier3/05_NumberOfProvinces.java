@@ -11,31 +11,8 @@
  *   DFS/BFS: O(N^2)
  *   Union-Find: O(N^2 * α(N)) ≈ O(N^2)
  *
- * --- 핵심 아이디어 (수도코드) ---
- *   방법 A) DFS/BFS:
- *     visited = new boolean[n]
- *     count = 0
- *     for i in 0..n-1:
- *       if not visited[i]:
- *         dfs(i)        // i와 연결된 모든 도시 방문 처리
- *         count++
- *     return count
- *
- *     dfs(u):
- *       visited[u] = true
- *       for v in 0..n-1:
- *         if isConnected[u][v] == 1 and not visited[v]:
- *           dfs(v)
- *
- *   방법 B) Union-Find:
- *     parent[i] = i, rank[i] = 0
- *     for i in 0..n-1:
- *       for j in i+1..n-1:
- *         if isConnected[i][j] == 1: union(i, j)
- *     return distinct find(i) 의 개수
- *
- *     find(x): 경로 압축
- *     union(a,b): rank/size 기반 합치기
+ * --- 핵심 아이디어 ---
+ *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
  *   Union-Find: 같은 컴포넌트에 속하는 모든 노드는 동일한 root를 갖는다.

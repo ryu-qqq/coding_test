@@ -12,23 +12,8 @@ import java.util.List;
  * --- 시간복잡도 목표 ---
  *   시간 O(N^2), 공간 O(1) (정렬 비용 별도)
  *
- * --- 핵심 아이디어 (수도코드) ---
- *   정렬 + 투 포인터.
- *
- *   sort(nums)
- *   for i in 0..n-3:
- *     if nums[i] > 0: break              // 더 이상 0 합 불가능
- *     if i > 0 and nums[i] == nums[i-1]: continue  // 중복 i 건너뜀
- *     l = i+1; r = n-1
- *     while l < r:
- *       sum = nums[i] + nums[l] + nums[r]
- *       if sum < 0: l++
- *       elif sum > 0: r--
- *       else:
- *         add [nums[i], nums[l], nums[r]]
- *         while l < r and nums[l] == nums[l+1]: l++   // 중복 l 건너뜀
- *         while l < r and nums[r] == nums[r-1]: r--   // 중복 r 건너뜀
- *         l++; r--
+ * --- 핵심 아이디어 ---
+ *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
  *   결과 리스트에는 동일한 삼중쌍이 한 번만 들어간다(중복 스킵 덕분).

@@ -9,18 +9,8 @@
  * --- 시간복잡도 목표 ---
  *   시간 O(N), 공간 O(1)
  *
- * --- 핵심 아이디어 (수도코드) ---
- *   Floyd's Tortoise and Hare (토끼와 거북이) 알고리즘.
- *   slow는 한 칸씩, fast는 두 칸씩 전진한다.
- *   사이클이 있다면 fast가 결국 slow를 따라잡는다(=만난다).
- *   사이클이 없다면 fast가 null에 먼저 도달한다.
- *
- *   slow = head; fast = head
- *   while fast != null and fast.next != null:
- *     slow = slow.next
- *     fast = fast.next.next
- *     if slow == fast: return true
- *   return false
+ * --- 핵심 아이디어 ---
+ *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
  *   사이클이 존재하면 fast - slow 의 거리(모듈러 사이클 길이)는 매 스텝마다 1씩 줄어든다.

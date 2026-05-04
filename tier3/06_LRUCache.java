@@ -10,39 +10,8 @@
  * --- 시간복잡도 목표 ---
  *   get/put 모두 O(1)  ← 핵심 제약
  *
- * --- 핵심 아이디어 (수도코드) ---
- *   HashMap<key, Node> + Doubly Linked List (DLL)
- *
- *   DLL 구조:
- *     head ←→ [most recent] ←→ ... ←→ [least recent] ←→ tail
- *     (head, tail은 dummy sentinel — null 체크 줄이기 위함)
- *
- *   class Node { int key, value; Node prev, next; }
- *
- *   get(key):
- *     if !map.contains(key): return -1
- *     node = map.get(key)
- *     moveToHead(node)
- *     return node.value
- *
- *   put(key, value):
- *     if map.contains(key):
- *       node = map.get(key)
- *       node.value = value
- *       moveToHead(node)
- *     else:
- *       node = new Node(key, value)
- *       map.put(key, node)
- *       addToHead(node)
- *       if map.size() > capacity:
- *         evicted = removeTail()
- *         map.remove(evicted.key)        // ← Node에 key가 저장돼있어야 가능!
- *
- *   helper:
- *     addToHead(node):    head ↔ node ↔ head.next
- *     removeNode(node):   prev ↔ next 로 우회
- *     moveToHead(node):   removeNode + addToHead
- *     removeTail():       node = tail.prev; removeNode(node); return node
+ * --- 핵심 아이디어 ---
+ *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
  *   - map.size() <= capacity

@@ -10,16 +10,8 @@
  * --- 시간복잡도 목표 ---
  *   시간 O(N), 공간 O(1)
  *
- * --- 핵심 아이디어 (수도코드) ---
- *   배열을 한 번 훑으면서 "지금까지 본 최저가 minPrice"를 갱신하고,
- *   현재 가격에서 minPrice를 뺀 값(=오늘 팔았을 때 수익)으로 best를 갱신한다.
- *
- *   minPrice = +infinity
- *   best = 0
- *   for p in prices:
- *     if p < minPrice: minPrice = p
- *     elif p - minPrice > best: best = p - minPrice
- *   return best
+ * --- 핵심 아이디어 ---
+ *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
  *   루프 i 직후, minPrice는 prices[0..i]의 최솟값,

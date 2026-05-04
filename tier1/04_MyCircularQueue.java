@@ -14,25 +14,8 @@
  * --- 시간복잡도 목표 ---
  *   모든 연산 O(1)
  *
- * --- 핵심 아이디어 (수도코드) ---
- *   고정 길이 배열 + head, tail, size 추적
- *   tail = (tail + 1) % capacity 로 회전
- *
- *   enQueue(v):
- *     if isFull(): return false
- *     tail = (tail + 1) % capacity
- *     arr[tail] = v
- *     size++
- *     return true
- *
- *   deQueue():
- *     if isEmpty(): return false
- *     head = (head + 1) % capacity
- *     size--
- *     return true
- *
- *   Front(): return isEmpty() ? -1 : arr[head]
- *   Rear():  return isEmpty() ? -1 : arr[tail]
+ * --- 핵심 아이디어 ---
+ *   (스스로 떠올려볼 것)
  *
  * --- 초기화 트릭 ---
  *   head=0, tail=-1 로 시작하면 enQueue 첫 호출에서 tail이 0이 됨.
@@ -46,79 +29,38 @@
  */
 class MyCircularQueue {
 
-    private final int[] arr;
-    private final int capacity;
-    private int size;
-    private int head;
-    private int tail;
-
-
-
     public MyCircularQueue(int k) {
-        this.capacity = k;
-        this.arr = new int[k];
-        this.size = 0;
-        this.head = 0;
-        this.tail = -1;
+        // TODO: 배열 + head/tail/size 초기화
     }
 
-    //tail   head
-    // 0    [ () , () ]
-    //
-    // tail =  0 % 2 -> 0
-    // 1    [ val1 , () ]
-
-    //       tail   head
-    //  0   [ val1 , () ]
-
-    // tail = (0+1) % 2 = 0
-    //       tail     head,
-    //  1   [ val2 ,  () ]
-
-
-    // tail = 2 % 2 = 1
-    //              head, tail
-    //  2   [ val2 , val3 ]
-
-
-
-    // haed = 2 % 2 = 0
-    //       head     tail
-    //  1   [ val2 , val3 ]
-
     public boolean enQueue(int value) {
-        if(isFull()) return false;
-
-        tail = (tail + 1) % capacity;
-        arr[tail] = value;
-        size++;
-
-        return true;
+        // TODO
+        return false;
     }
 
     public boolean deQueue() {
-        if(isEmpty()) return false;
-        head = (head + 1) % capacity;
-        size--;
-        return true;
+        // TODO
+        return false;
     }
 
     public int Front() {
-        if (isEmpty()) return -1;
-        return arr[head];
+        // TODO
+        return -1;
     }
 
     public int Rear() {
-        if (isEmpty()) return -1;
-        return arr[tail];
+        // TODO
+        return -1;
     }
 
     public boolean isEmpty() {
-        return size == 0;
+        // TODO
+        return true;
     }
 
     public boolean isFull() {
-        return size == capacity;
+        // TODO
+        return false;
     }
 
     public static void main(String[] args) {

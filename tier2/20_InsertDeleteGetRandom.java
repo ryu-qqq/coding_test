@@ -17,23 +17,8 @@ import java.util.Random;
  * --- 시간복잡도 목표 ---
  *   모두 평균 O(1)
  *
- * --- 핵심 아이디어 (수도코드) ---
- *   ArrayList(or Vector) + HashMap(value → index) 조합.
- *
- *   insert(val):
- *     if val in map: return false
- *     list.add(val); map[val] = list.size() - 1
- *     return true
- *
- *   remove(val):
- *     if val not in map: return false
- *     idx = map[val]; last = list.last
- *     list[idx] = last; map[last] = idx     // 마지막 원소를 idx 자리로 이동
- *     list.removeLast(); map.remove(val)
- *     return true
- *
- *   getRandom():
- *     return list[ random.nextInt(list.size()) ]
+ * --- 핵심 아이디어 ---
+ *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
  *   - list와 map은 동일한 원소 집합을 표현한다.
