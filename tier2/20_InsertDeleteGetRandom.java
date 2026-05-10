@@ -21,13 +21,10 @@ import java.util.Random;
  *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   - list와 map은 동일한 원소 집합을 표현한다.
- *   - 모든 v에 대해 list[map[v]] == v.
+ *   (스스로 떠올려볼 것)
  *
  * --- 함정 ---
- *   - remove에서 "삭제할 인덱스가 마지막 인덱스인 경우"도 일관 처리.
- *   - List에서 임의 인덱스 remove(O(N)) 대신 last로 swap 후 removeLast(O(1))를 써야 함.
- *   - getRandom 호출 시 비어있을 일은 LC에서 보장하지 않지만 호출 안 됨.
+ *   (스스로 떠올려볼 것)
  */
 class InsertDeleteGetRandom {
 
@@ -43,18 +40,28 @@ class InsertDeleteGetRandom {
     }
 
     public boolean insert(int val) {
-        // TODO
-        return false;
+        if(idxMap.containsKey(val)) return false;
+        idxMap.put(val, list.size());
+        list.add(val);
+        return true;
     }
 
     public boolean remove(int val) {
-        // TODO
-        return false;
+        if(!idxMap.containsKey(val)) return false;
+        int idx = idxMap.get(val);
+        int lastVal = list.get(list.size() - 1);
+
+        list.set(idx, lastVal);
+        idxMap.put(lastVal, idx);
+
+        list.remove(list.size() - 1);
+        idxMap.remove(val);
+
+        return true;
     }
 
     public int getRandom() {
-        // TODO
-        return -1;
+        return list.get(rng.nextInt(list.size()));
     }
 
     public static void main(String[] args) {

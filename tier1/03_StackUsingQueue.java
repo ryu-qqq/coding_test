@@ -18,35 +18,39 @@ import java.util.Queue;
  *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   큐의 front 가 항상 스택의 top.
+ *   (스스로 떠올려볼 것)
  *
  * --- 함정 ---
- *   - Deque 메서드 (addFirst 등) 쓰지 말 것 — Queue 인터페이스만 사용해야 의미.
- *   - 회전 횟수: size-1 (자기 자신은 빼고).
+ *   (스스로 떠올려볼 것)
  */
 class StackUsingQueue {
 
+    private final Queue<Integer> mainQueue;
+
     public StackUsingQueue() {
-        // TODO: 자료구조 초기화
+        mainQueue = new ArrayDeque<>();
     }
 
     public void push(int x) {
-        // TODO
+        mainQueue.add(x);
+        for(int i =0; i< mainQueue.size()- 1; i ++){
+            Integer val  = mainQueue.poll();
+            mainQueue.add(val);
+        }
     }
 
     public int pop() {
-        // TODO
-        return 0;
+        if(mainQueue.isEmpty()) return 0;
+        return mainQueue.poll();
     }
 
     public int top() {
-        // TODO
-        return 0;
+        if(mainQueue.isEmpty()) return 0;
+        return mainQueue.peek();
     }
 
     public boolean empty() {
-        // TODO
-        return true;
+        return mainQueue.isEmpty();
     }
 
     public static void main(String[] args) {

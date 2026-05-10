@@ -1,3 +1,4 @@
+import java.util.*;
 /**
  * LeetCode 641 - Design Circular Deque
  *
@@ -20,58 +21,81 @@
  *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   - 데이터는 절대 안 움직인다. head/tail 포인터만 이동.
- *   - 0 <= size <= capacity
- *   - size 가 진실의 원천 (head/tail 의 대소 관계 의미 X)
+ *   (스스로 떠올려볼 것)
  *
  * --- 함정 ---
- *   - 인덱스를 뒤로 갈 때 (insertFront, deleteLast) 자바 % 가 음수면 음수 반환.
- *     반드시 + capacity 보정: (i - 1 + capacity) % capacity
+ *   (스스로 떠올려볼 것)
  */
 class MyCircularDeque {
 
+    private final int[] arr;
+    private final int capacity;
+    private int size, head, tail;
+
+
+
     public MyCircularDeque(int k) {
-        // TODO: 배열 + head/tail/size/capacity 초기화
+        arr = new int[k];
+        capacity = k;
+        size = 0;
+        head = 0;
+        tail = -1;        
     }
 
+    // [ () () () ]
+    // 2 % 3 -> 0
+
+    // 그러니까 앞에 넣는건 헤드만 움직이면 되는데 헤드가 앞으로 넣으려면 -1 해야한다
     public boolean insertFront(int value) {
-        // TODO
-        return false;
-    }
+        if(isFull()) return false;
+        head = (head - 1 + capacity) % capacity;
+        arr[head] = value;
+        size ++;
 
-    public boolean insertLast(int value) {
-        // TODO
-        return false;
-    }
-
-    public boolean deleteFront() {
-        // TODO
-        return false;
-    }
-
-    public boolean deleteLast() {
-        // TODO
-        return false;
-    }
-
-    public int getFront() {
-        // TODO
-        return -1;
-    }
-
-    public int getRear() {
-        // TODO
-        return -1;
-    }
-
-    public boolean isEmpty() {
-        // TODO
         return true;
     }
 
+     // 그러니까 뒤에 넣는건 꼬리만 움직이면 되는데 꼬리가 뒤로 움직여야하니 + 1 해야한다
+    public boolean insertLast(int value) {
+        if(isFull()) return false;
+        tail = (tail + 1 ) % capacity;
+        arr[tail] = value;
+        size ++;
+        return true;
+    }
+
+    // 그러니까 앞에 빼는건 헤드만 움직이면 되는데 헤드가 뒤로 움직여야하니 + 1 해야한다
+    public boolean deleteFront() {
+        if(isEmpty()) return false;
+        head = (head + 1) % capacity;
+        size --;
+        return true;
+    }
+
+    // 그러니까 뒤에 빼는건 꼬리만 움직이면 되는데 꼬리가 앞으로 움직여야하니 -1 해야한다
+    public boolean deleteLast() {
+        if(isEmpty()) return false;
+        tail = (tail - 1 + capacity) % capacity;
+        size --;
+        return true;
+    }
+
+    public int getFront() {
+        if(isEmpty()) return -1;
+        return arr[head];
+    }
+
+    public int getRear() {
+        if(isEmpty()) return -1;
+        return arr[tail];
+    }
+
+    public boolean isEmpty() {
+        return size ==0;
+    }
+
     public boolean isFull() {
-        // TODO
-        return false;
+        return size == capacity;
     }
 
     public static void main(String[] args) {

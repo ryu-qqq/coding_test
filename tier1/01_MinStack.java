@@ -16,34 +16,49 @@ import java.util.Deque;
  *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   minStack.top()은 항상 mainStack에 현재 살아있는 모든 원소의 최솟값.
+ *   (스스로 떠올려볼 것)
  *
  * --- 엣지 케이스 ---
- *   - 같은 값이 중복 push 될 때 minStack에도 같이 들어가야 pop 시 짝이 맞음
- *     (그래서 push 조건이 < 가 아니라 <= )
+ *   (스스로 떠올려볼 것)
  */
 class MinStack {
 
+    private final Deque<Integer> mainStack;
+    private final Deque<Integer> minStack;
+
     public MinStack() {
-        // TODO: 자료구조 초기화
+        mainStack = new ArrayDeque<>();
+        minStack = new ArrayDeque<>();
     }
 
     public void push(int val) {
-        // TODO
+        mainStack.push(val);
+        if(minStack.isEmpty() || minStack.peek() >= val){
+            minStack.push(val);
+        }
     }
 
     public void pop() {
-        // TODO
+        if(!mainStack.isEmpty()){
+            Integer val = mainStack.pop();
+            if(val.equals(minStack.peek())){
+                minStack.pop();
+            }
+        }
     }
 
     public int top() {
-        // TODO
-        return 0;
+        if(mainStack.isEmpty()){
+            return 0;
+        }
+        return mainStack.peek();
     }
 
     public int getMin() {
-        // TODO
-        return 0;
+        if(minStack.isEmpty()){
+            return 0;
+        }
+        return minStack.peek();
     }
 
     public static void main(String[] args) {

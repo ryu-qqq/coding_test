@@ -18,18 +18,38 @@ import java.util.PriorityQueue;
  *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   힙 방식: 매 반복 후 heap에는 "현재까지 본 값들 중 빈도 상위 ≤ K개"가 들어 있다.
+ *   (스스로 떠올려볼 것)
  *
  * --- 함정 ---
- *   - k가 distinct 개수보다 작거나 같음을 가정. (LC 보장)
- *   - 정렬 풀이는 O(N log N)이라 목표 시간복잡도 미달일 수 있음.
+ *   (스스로 떠올려볼 것)
  */
 class TopKFrequent {
 
     static class Solution {
         public int[] topKFrequent(int[] nums, int k) {
-            // TODO: HashMap + min-heap (또는 bucket sort)
-            return new int[0];
+            HashMap<Integer, Integer> map = new HashMap<>();
+
+            for(int n : nums){
+                map.put(n, map.getOrDefault(n,0 ) + 1);
+            }
+
+            PriorityQueue<Integer> heap = new PriorityQueue<>(
+                (a, b) -> map.get(a) - map.get(b)
+            );
+
+            for(int key : map.keySet()){
+                heap.add(key);
+                if(heap.size() > k) heap.poll();
+            }
+
+            int[] results = new int[k];
+
+            for(int i =0; i < k; i ++){
+                results[i] = heap.poll();
+            }
+            
+
+            return results;
         }
     }
 

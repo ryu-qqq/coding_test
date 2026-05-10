@@ -13,11 +13,10 @@
  *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   재귀 호출 직후 반환값은 "그 서브트리의 최대 깊이".
+ *   (스스로 떠올려볼 것)
  *
  * --- 함정 ---
- *   - 빈 트리 (root == null) → 0 반환.
- *   - 한쪽만 자식이 있는 경우, 양쪽 max를 비교해야 함 (depth는 leaf까지 거리).
+ *   (스스로 떠올려볼 것)
  */
 class MaxDepth {
 
@@ -29,8 +28,8 @@ class MaxDepth {
 
     static class Solution {
         public int maxDepth(TreeNode root) {
-            // TODO
-            return 0;
+            if(root == null) return 0;
+            return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
         }
     }
 

@@ -14,20 +14,24 @@
  *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   루프 i 직후, minPrice는 prices[0..i]의 최솟값,
- *   best는 0..i 까지의 최대 수익.
+ *   (스스로 떠올려볼 것)
  *
  * --- 함정 ---
- *   - 파는 날이 사는 날 이후여야 하므로, 같은 인덱스에서 팔면 0이 나온다 (자연스레 처리됨).
- *   - 가격이 단조 감소면 best = 0 이 정답.
- *   - 빈 배열은 0.
+ *   (스스로 떠올려볼 것)
  */
 class BestTimeBuySell {
 
     static class Solution {
         public int maxProfit(int[] prices) {
-            // TODO: 단일 패스, minPrice 추적
-            return 0;
+            int minPrice = Integer.MAX_VALUE;
+            int maxProfit = 0;
+
+            for(int price : prices){
+                minPrice = Math.min(minPrice, price);
+                maxProfit = Math.max(maxProfit, price - minPrice);
+            }
+
+            return maxProfit;
         }
     }
 

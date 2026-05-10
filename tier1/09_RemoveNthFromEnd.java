@@ -13,11 +13,10 @@
  *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   while 루프 시작 시 fast와 slow의 간격은 정확히 n+1 노드이다.
+ *   (스스로 떠올려볼 것)
  *
  * --- 함정 ---
- *   - 더미 헤드를 두지 않으면 head 자체를 삭제하는 케이스 처리가 까다롭다.
- *   - n이 리스트 길이와 같으면(=head 삭제) 가장 흔히 실수하는 케이스.
+ *   (스스로 떠올려볼 것)
  */
 class RemoveNthFromEnd {
 
@@ -29,8 +28,24 @@ class RemoveNthFromEnd {
 
     static class Solution {
         public ListNode removeNthFromEnd(ListNode head, int n) {
-            // TODO
-            return null;
+            ListNode dummy = new ListNode(0);
+            ListNode slow = dummy;
+            ListNode fast = dummy;
+
+            dummy.next = head;
+
+            for(int i =0; i <n; i ++){
+                fast = fast.next;
+            }
+
+            while(fast.next != null){
+                slow = slow.next;
+                fast = fast.next;
+            }
+
+            slow.next = slow.next.next;
+
+            return dummy.next;
         }
     }
 

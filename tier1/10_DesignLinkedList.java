@@ -18,44 +18,102 @@
  *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   - dummy.next 부터 size개의 노드가 정확히 존재한다.
- *   - get(i)는 0-based이며 0 <= i < size 일 때만 유효.
+ *   (스스로 떠올려볼 것)
  *
  * --- 함정 ---
- *   - addAtIndex에서 index == size 인 경우는 tail 추가로 허용해야 한다.
- *   - deleteAtIndex가 size 변경을 잊어버리면 이후 인덱스 검사가 깨진다.
+ *   (스스로 떠올려볼 것)
  */
 class DesignLinkedList {
 
     private static class ListNode {
         int val;
-        ListNode next;
+        ListNode prev, next;
         ListNode(int v) { val = v; }
     }
 
+    private final ListNode head;
+    private final ListNode tail;
+    private int size;
+
     public DesignLinkedList() {
-        // TODO: dummy head, size 초기화
+        head = new ListNode(0);
+        tail = new ListNode(0);
+        size=0;
+        head.next = tail;
+        tail.prev = head;
     }
 
     public int get(int index) {
-        // TODO
-        return -1;
+        if(index < 0 || index >= size) return -1;
+        ListNode cur = head.next;
+        for(int i =0; i <index; i ++){
+            cur = cur.next;
+        }
+
+        return cur.val;
     }
 
     public void addAtHead(int val) {
-        // TODO
+        ListNode newNode = new ListNode(val);
+        ListNode old = head.next;
+        old.prev = newNode;
+
+        newNode.next = old;
+        newNode.prev = head;
+        head.next = newNode;
+        size++;
     }
 
     public void addAtTail(int val) {
-        // TODO
+        ListNode newNode = new ListNode(val);
+        ListNode old = tail.prev;
+        old.next = newNode;
+        newNode.prev = old;
+        newNode.next = tail;
+        tail.prev = newNode;
+
+        size++;
     }
 
     public void addAtIndex(int index, int val) {
-        // TODO
+        if(index < 0 || index >= size) return;
+
+        ListNode cur = head;
+        for(int i =0; i <index; i ++){
+            cur = cur.next;
+        }
+        //   idx
+        // 1  3 (4) 5
+
+        ListNode newNode = new ListNode(val);
+        ListNode next = cur.next;                                                                                                                                                                                                                                
+
+        newNode.prev = cur;    // 4 -> 3           
+        newNode.next = next;   // 4 -> 5
+
+        cur.next = newNode; // 3 -> 4
+        next.prev = newNode; // 5 -> 4
+
+        size ++;
+
     }
 
     public void deleteAtIndex(int index) {
-        // TODO
+        if(index < 0 || index >= size) return;
+        ListNode cur = head.next;
+        for(int i =0; i <index; i ++){
+            cur = cur.next;
+        }
+
+        //   idx
+        // 1  (3)  5
+        ListNode prevNode = cur.prev;
+        ListNode nextNode = cur.next;
+        prevNode.next = nextNode;
+        nextNode.prev = prevNode;
+
+        size --;
+
     }
 
     public static void main(String[] args) {

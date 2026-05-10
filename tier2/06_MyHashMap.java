@@ -1,3 +1,4 @@
+import java.util.*;
 /**
  * LeetCode 706 - Design HashMap
  *
@@ -15,30 +16,59 @@
  *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   같은 key는 한 번만 존재한다 (덮어쓰기).
+ *   (스스로 떠올려볼 것)
  *
  * --- 면접 포인트 ---
- *   - 충돌 해결: 체이닝 vs 오픈 어드레싱
- *   - 왜 capacity는 보통 소수(prime)나 2의 거듭제곱인가?
- *   - load factor는 왜 0.75가 일반적인가? (공간 vs 시간 trade-off)
+ *   (스스로 떠올려볼 것)
  */
 class MyHashMap {
 
+    private static final int SIZE = 1000;
+    private LinkedList<int[]>[] buckets;
+
     public MyHashMap() {
-        // TODO: 버킷 배열 초기화 (예: capacity = 769 또는 1024)
+        buckets = new LinkedList[SIZE];
+        for(int i =0; i <SIZE; i ++){
+            buckets[i] = new LinkedList<>();
+        }
+    }
+
+    private int hash(int key){
+        return key % SIZE;
     }
 
     public void put(int key, int value) {
-        // TODO
+        LinkedList<int[]> bucket = buckets[hash(key)];
+        for(int[] entry : bucket){
+            if(entry[0] == key){
+                entry[1] = value;
+                return;
+            }
+        }
+        bucket.add(new int[]{key, value});
     }
 
     public int get(int key) {
-        // TODO
+        LinkedList<int[]> bucket = buckets[hash(key)];
+        for(int[] entry : bucket){
+            if(entry[0] == key){
+                return entry[1];
+            }
+        }
+
         return -1;
     }
 
     public void remove(int key) {
-        // TODO
+        LinkedList<int[]> bucket = buckets[hash(key)];
+        Iterator<int[]> it =  bucket.iterator();
+        while(it.hasNext()){
+            if(it.next()[0] == key){
+                it.remove();
+                return;
+            }
+        }
+
     }
 
     public static void main(String[] args) {

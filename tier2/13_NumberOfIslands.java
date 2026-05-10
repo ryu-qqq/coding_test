@@ -14,22 +14,61 @@
  *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   바깥 루프가 (r,c)를 지나는 시점에서, (r,c)가 '1'이면 그 셀이 속한 섬은 아직 카운트 안 됨.
+ *   (스스로 떠올려볼 것)
  *
  * --- 함정 ---
- *   - 입력 그리드를 변경해도 되는지 문제 조건 확인 (LC는 허용).
- *     변경 금지라면 별도 visited[][] 배열을 써야 함.
- *   - 대각선은 연결로 치지 않음 (4방향만).
- *   - 매우 큰 그리드에서 재귀 깊이로 StackOverflow 가능 → BFS 권장하기도 함.
+ *   (스스로 떠올려볼 것)
  */
 class NumberOfIslands {
 
+    static final int[] dx = {-1, 1, 0, 0};
+    static final int[] dy = {0, 0, 1, -1};
+    static boolean[][] visited;
+    static int row;
+    static int cols;
+
     static class Solution {
         public int numIslands(char[][] grid) {
-            // TODO: 모든 셀을 순회하며 '1' 만나면 DFS/BFS로 가라앉히고 count++
-            return 0;
+            row = grid.length;
+            if (row == 0) return 0;
+            cols = grid[0].length;
+            int cnt = 0;
+            visited = new boolean[row][cols];
+            
+            for(int i =0; i <row; i ++){
+                for(int j=0; j <cols; j ++){
+                    if(!visited[i][j] && grid[i][j] =='1'){
+                        dfs(grid, i, j);
+                        cnt++;
+                    }
+                }
+            }
+
+
+            return cnt;
         }
     }
+
+    static void dfs(char[][] grid, int i, int j){
+        visited[i][j] = true;
+        for(int k =0; k<4; k ++){
+            int curX = i + dx[k];
+            int curY = j + dy[k];
+
+            if(curX < row && curX >= 0 && curY >= 0 && curY < cols 
+                && !visited[curX][curY]
+                && grid[curX][curY] == '1'
+            ){
+                visited[curX][curY] = true;
+                dfs(grid, curX, curY);
+            }
+        }
+    }
+
+
+
+
+
 
     public static void main(String[] args) {
         Solution sol = new Solution();

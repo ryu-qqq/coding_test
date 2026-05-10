@@ -18,49 +18,61 @@
  *   (스스로 떠올려볼 것)
  *
  * --- 초기화 트릭 ---
- *   head=0, tail=-1 로 시작하면 enQueue 첫 호출에서 tail이 0이 됨.
- *   또는 head=tail=0 으로 두고 size로만 비/참 판단해도 됨 (취향).
+ *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   - 0 <= size <= capacity
- *   - size == 0 ⇔ isEmpty()
- *   - size == capacity ⇔ isFull()
- *   - head, tail 모두 [0, capacity) 범위에 있음
+ *   (스스로 떠올려볼 것)
  */
 class MyCircularQueue {
 
+    private final int[] arr;
+    private final int capacity;              
+    private int head;
+    private int tail;
+    private int size;
+
+
     public MyCircularQueue(int k) {
-        // TODO: 배열 + head/tail/size 초기화
+        arr = new int[k];
+        capacity = k;
+        head =0;
+        tail =-1;
+        size = 0;
     }
 
     public boolean enQueue(int value) {
-        // TODO
-        return false;
-    }
-
-    public boolean deQueue() {
-        // TODO
-        return false;
-    }
-
-    public int Front() {
-        // TODO
-        return -1;
-    }
-
-    public int Rear() {
-        // TODO
-        return -1;
-    }
-
-    public boolean isEmpty() {
-        // TODO
+        if(isFull()) return false;
+        tail = (tail + 1) % capacity;
+        arr[tail] = value;
+        size++;
+    
         return true;
     }
 
+    public boolean deQueue() {
+        if(isEmpty()) return false;
+        head = (head + 1) % capacity;
+        size--;
+
+        return true;
+    }
+
+    public int Front() {
+        if (isEmpty()) return -1;
+        return arr[head];
+    }
+
+    public int Rear() {
+        if (isEmpty()) return -1;
+        return arr[tail];
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
     public boolean isFull() {
-        // TODO
-        return false;
+        return size == capacity;
     }
 
     public static void main(String[] args) {

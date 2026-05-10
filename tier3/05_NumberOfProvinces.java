@@ -15,19 +15,61 @@
  *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   Union-Find: 같은 컴포넌트에 속하는 모든 노드는 동일한 root를 갖는다.
+ *   (스스로 떠올려볼 것)
  *
  * --- 함정 ---
- *   - 행렬은 대칭 (isConnected[i][j] == isConnected[j][i]).
- *   - 대각선은 항상 1 (자기 자신과 연결) — count 로직에 영향 없음.
- *   - DFS 깊이가 N까지 갈 수 있음 → 큰 N에서는 BFS나 Union-Find가 안전.
+ *   (스스로 떠올려볼 것)
  */
 class NumberOfProvinces {
 
+    static class UnionFind{
+        int[] parent;
+        int count;
+
+        public UnionFind(int n){
+            parent = new int[n];
+            count =n;
+            for(int i =0; i < n; i ++){
+                parent[i] = i;
+            }
+        }
+
+        public int find(int i){
+            if(parent[i] !=i){
+                parent[i] = find(parent[i]);
+            }
+
+            return parent[i];
+        }
+
+        public void union(int x, int y){
+            int rx = find(x);
+            int ry = find(y);
+            if(rx == ry) return;
+            parent[rx] = ry;
+            count--;
+        }
+
+        public int getCoutn(){
+            return count;
+        }
+    }
+
+
     static class Solution {
         public int findCircleNum(int[][] isConnected) {
-            // TODO: DFS/BFS 또는 Union-Find
-            return 0;
+            int n = isConnected.length;
+            UnionFind uf = new UnionFind(n);
+            for(int i =0; i <n; i ++){
+                for(int j = i + 1; j<n; j ++){
+                    if (isConnected[i][j] == 1) {        
+                        uf.union(i, j);                                                                                                                                                                                         
+                    } 
+                }
+            }
+
+
+            return uf.count;
         }
 
         // ---- Union-Find 헬퍼 (선택적으로 채울 것) ----

@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * LeetCode 300 - Longest Increasing Subsequence
  *
@@ -14,19 +16,33 @@
  *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   DP: dp[i]가 채워진 직후, "i를 끝으로 하는 LIS"는 dp[i] 길이.
- *   patience: tails는 strictly 증가하며, 길이별 최소 마지막 값을 유지.
+ *   (스스로 떠올려볼 것)
  *
  * --- 함정 ---
- *   - "strictly" 증가 — 같은 값은 LIS에 함께 못 들어감 (lower_bound 사용).
- *   - 빈 배열은 0.
+ *   (스스로 떠올려볼 것)
  */
 class LIS {
 
     static class Solution {
         public int lengthOfLIS(int[] nums) {
-            // TODO: O(N^2) DP 또는 O(N log N) patience sort
-            return 0;
+            int length = nums.length;
+            if(length ==0) return 0;
+            
+            int[] dp = new int[length];
+            Arrays.fill(dp, 1);
+
+            int maxLen = 1;
+
+            for(int i =1; i<length; i ++){
+                for(int j =0; j<i; j ++){
+                    if(nums[j] < nums[i]){
+                        dp[i] = Math.max(dp[i], dp[j] + 1);
+                    }
+                }
+                maxLen = Math.max(maxLen, dp[i]);
+            }
+
+            return maxLen;
         }
     }
 

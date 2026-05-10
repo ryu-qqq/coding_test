@@ -17,36 +17,52 @@ import java.util.Deque;
  *   (스스로 떠올려볼 것)
  *
  * --- Amortized 분석 ---
- *   각 원소는 inStack에 1번 push, outStack으로 1번 이동, outStack에서 1번 pop
- *   = 원소당 최대 3번의 연산. 따라서 평균 O(1).
+ *   (스스로 떠올려볼 것)
  *
  * --- 함정 ---
- *   pop 할 때마다 in→out 이동을 하면 안 됨 (outStack이 비었을 때만!)
- *   그렇지 않으면 순서가 망가진다.
+ *   (스스로 떠올려볼 것)
  */
 class QueueUsingTwoStacks {
 
+    private final Deque<Integer> mainQueue;
+    private final Deque<Integer> subQueue;
+
+
+
     public QueueUsingTwoStacks() {
-        // TODO: 자료구조 초기화
+        mainQueue = new ArrayDeque<>();
+        subQueue = new ArrayDeque<>();
     }
 
     public void push(int x) {
-        // TODO
+        mainQueue.push(x);
     }
 
     public int pop() {
-        // TODO
-        return 0;
+        if(subQueue.isEmpty()){
+            while(!mainQueue.isEmpty()){
+                Integer val = mainQueue.pop();
+                subQueue.push(val);
+            }
+        }
+
+        return subQueue.pop();
     }
 
     public int peek() {
-        // TODO
-        return 0;
+        if(subQueue.isEmpty()){
+            while(!mainQueue.isEmpty()){
+                Integer val = mainQueue.pop();
+                subQueue.push(val);
+            }
+        }
+
+        return subQueue.peek();
     }
 
     public boolean empty() {
-        // TODO
-        return true;
+        
+        return mainQueue.isEmpty() && subQueue.isEmpty();
     }
 
     public static void main(String[] args) {

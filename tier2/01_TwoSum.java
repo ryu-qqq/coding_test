@@ -17,17 +17,34 @@ import java.util.Map;
  *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   map은 "현재 i 직전까지의 (값 → 인덱스)" 매핑을 정확히 반영.
+ *   (스스로 떠올려볼 것)
  *
  * --- 함정 ---
- *   - 자기 자신을 두 번 사용하면 안 됨 → 먼저 lookup 후에 put.
- *   - 동일 값이 두 번 등장해 답이 되는 경우(예: [3,3], target 6)는 위 순서로 자연 처리됨.
+ *   (스스로 떠올려볼 것)
  */
 class TwoSum {
 
     static class Solution {
         public int[] twoSum(int[] nums, int target) {
-            // TODO: HashMap one-pass
+            HashMap<Integer, Integer> map = new HashMap<>();
+
+
+            //  target 4
+            // 1, 3
+
+            // 4 - 1 -> 3 
+
+            for(int i = 0; i < nums.length; i++){
+                int abs = target - nums[i];
+                Integer value = map.get(abs);
+                if(map.containsKey(value)){
+                    return new int[]{i, value};
+                }
+                map.put(nums[i], i);
+            }
+
+
+
             return new int[]{-1, -1};
         }
     }
@@ -46,8 +63,8 @@ class TwoSum {
         assert (r3[0] == 0 && r3[1] == 1) || (r3[0] == 1 && r3[1] == 0) : "duplicate";
 
         int[] r4 = sol.twoSum(new int[]{-1, -2, -3, -4, -5}, -8);
-        assert (r4[0] + r4[1] == 5) : "negatives, indices sum to 5 (2+3)";
-
+        assert (r4[0] + r4[1] == 6) : "negatives, indices sum to 6 (2+4)";                                                                                                                                                                                         
+        
         // 사용하지 않더라도 import 검증
         Map<Integer, Integer> _u = new HashMap<>();
         _u.put(0, 0);

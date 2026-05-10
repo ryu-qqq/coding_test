@@ -13,11 +13,10 @@
  *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   재귀 호출 시점에서 p, q는 항상 두 트리의 "같은 좌표"에 있는 노드.
+ *   (스스로 떠올려볼 것)
  *
  * --- 함정 ---
- *   - null 체크 순서: 둘 다 null → true 가 가장 먼저, 그 후 한쪽 null 체크.
- *   - 값만 비교하고 구조 비교를 빼먹는 경우 (구조가 다르면 한쪽 null 케이스에서 잡힘).
+ *   (스스로 떠올려볼 것)
  */
 class SameTree {
 
@@ -29,8 +28,13 @@ class SameTree {
 
     static class Solution {
         public boolean isSameTree(TreeNode p, TreeNode q) {
-            // TODO
-            return false;
+            if(p == null && q == null) return true;
+            if(p == null || q == null) return false;
+
+            
+            return p.val == q.val &&
+            isSameTree(p.left, q.left) &&
+            isSameTree(p.right, q.right);
         }
     }
 

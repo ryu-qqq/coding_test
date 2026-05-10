@@ -1,7 +1,9 @@
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * LeetCode 102 - Binary Tree Level Order Traversal
@@ -18,11 +20,10 @@ import java.util.List;
  *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   매 while 반복 진입 시점에 큐에는 "현재 레벨"의 노드들만 들어 있다.
+ *   (스스로 떠올려볼 것)
  *
  * --- 함정 ---
- *   - 같은 큐에서 그대로 꺼내면 다음 레벨 노드와 섞임 → 반드시 levelSize 고정.
- *   - 빈 트리 → 빈 리스트.
+ *   (스스로 떠올려볼 것)
  */
 class LevelOrder {
 
@@ -34,8 +35,28 @@ class LevelOrder {
 
     static class Solution {
         public List<List<Integer>> levelOrder(TreeNode root) {
-            // TODO: BFS 큐를 사용해 레벨별로 묶어 반환
-            return new ArrayList<>();
+            Queue<TreeNode> q = new LinkedList<>();
+            List<List<Integer>> results = new ArrayList<>();
+            if (root == null) return results;
+            q.add(root);
+
+            while(!q.isEmpty()){
+                int size = q.size();
+                List<Integer> level = new ArrayList<>();
+                for(int i =0; i <size; i ++){
+                    TreeNode cur = q.poll();
+                    level.add(cur.val);
+                    if(cur.left != null) q.add(cur.left);
+                    if(cur.right != null) q.add(cur.right);
+                }
+
+                results.add(level);
+
+
+        
+            }
+
+            return results;
         }
     }
 

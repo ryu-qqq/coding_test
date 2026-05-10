@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -16,19 +17,59 @@ import java.util.List;
  *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   결과 리스트에는 동일한 삼중쌍이 한 번만 들어간다(중복 스킵 덕분).
+ *   (스스로 떠올려볼 것)
  *
  * --- 함정 ---
- *   - 중복 제거를 i, l, r 모두에서 해야 한다.
- *   - 정렬 안 하면 두 포인터 전략 자체가 안 통한다.
- *   - 결과는 [-1, -1, 2] 같이 정렬된 형태로 들어가야 함 (정렬 후 인덱싱이 자연스러움).
+ *   (스스로 떠올려볼 것)
  */
 class ThreeSum {
 
     static class Solution {
         public List<List<Integer>> threeSum(int[] nums) {
-            // TODO: 정렬 + 투 포인터
-            return new ArrayList<>();
+            Arrays.sort(nums);
+
+            List<List<Integer>> results = new ArrayList<>();
+
+
+            // b + c =  - a
+            // -2  -1  -1  0  2  1  3
+
+            for(int i =0; i <nums.length; i ++){
+                if(nums[i] >0) break;
+                if(i > 0 && nums[i] == nums[i-1]) continue;
+
+
+                int target =  nums[i] * -1;
+
+                int left = i + 1;
+                int right = nums.length - 1;
+                
+                while(left < right){
+
+                    int a = nums[left];
+                    int b = nums[right];
+                    int sum = a+b;
+
+                    if(sum == target){
+                        results.add(List.of(a, b, nums[i]));
+
+                        while(left < right && nums[left] == nums[left+1]) left ++;
+                        while(left < right && nums[right] == nums[right-1]) right --;
+
+                        left ++;
+                        right --;
+
+                    }else if(sum < target ){
+                        left ++;
+                    }else{
+                        right --;
+                    }
+                }
+
+            }
+
+        
+            return results;
         }
     }
 

@@ -15,18 +15,39 @@
  *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   탐색 종료 시점까지 "이미 버린 쌍" 중 best를 만들 수 있는 쌍은 없다(증명 가능).
+ *   (스스로 떠올려볼 것)
  *
  * --- 함정 ---
- *   - 같은 높이일 때 어느 쪽을 옮겨도 무방.
- *   - n < 2 인 경우 0 반환 (LC는 n >= 2 보장하기도 함).
+ *   (스스로 떠올려볼 것)
  */
 class ContainerWithMostWater {
 
     static class Solution {
         public int maxArea(int[] height) {
-            // TODO: 투 포인터
-            return 0;
+            int left = 0;
+            int right = height.length -1;
+            int maxArea = 0;
+
+            while(left < right){
+                int leftHeight = height[left];
+                int rightHeight = height[right];
+                int h = Math.min(leftHeight, rightHeight);
+                int d = right - left;
+
+                maxArea = Math.max(maxArea, h * d);
+
+                if(leftHeight < rightHeight){
+                    left++;
+                }else{
+                    right--;
+                }
+                
+
+
+            }
+
+
+            return maxArea;
         }
     }
 

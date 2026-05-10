@@ -1,3 +1,4 @@
+import java.util.*;
 /**
  * LeetCode 460 - LFU Cache
  *
@@ -15,32 +16,116 @@
  *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   - 모든 freqToList[f]의 노드들은 freq == f
- *   - keyToNode.size() == sum(freqToList[f].size())
- *   - minFreq <= 모든 살아있는 노드의 freq
+ *   (스스로 떠올려볼 것)
  *
  * --- 핵심 포인트 ---
- *   - 빈도가 같은 노드들은 DLL로 LRU 순서 유지 (head=최근, tail=오래됨)
- *   - 새 원소 들어올 때 minFreq를 1로 강제 리셋해야 함
- *   - bumpFreq 후 minFreq 업데이트는 oldFreq의 리스트가 비어야만!
+ *   (스스로 떠올려볼 것)
  *
  * --- 면접 포인트 ---
- *   왜 freq별로 따로 DLL을 두는가?
- *     → eviction 시 "최소 freq 그룹에서 LRU"를 O(1)에 찾아야 하므로
+ *   (스스로 떠올려볼 것)
  */
 class LFUCache {
 
+    static class Node{
+        int key, value, freq;
+        Node prev, next;
+        Node(int k, int v){
+            this.key = k;
+            this.value = v;
+            this.freq = 1;
+        }
+    }
+
+    static class DLL{
+        Node head, tail;
+        int size;
+        DLL(){
+            this.head = new Node(0, 0);
+            this.tail = new Node(0, 0);
+            head.next = tail;
+            tail.prev = head;
+            
+        }
+
+
+        public void addToHead(Node node){
+            Node frontNode = head.next;
+
+            
+            node.next = frontNode;
+            node.prev =head;
+
+            head.next = node;
+            frontNode.prev = node;
+            size++;
+        }
+
+
+        public void removeNode(Node node){
+            Node prevNode = node.prev;
+            Node nextNode = node.next;
+
+            prevNode.next = nextNode;
+            nextNode.prev = prevNode;
+            size--;
+        }
+
+        public Node removeTail(){
+            Node lru = tail.prev;
+            removeNode(lru);
+
+            return lru;
+        }
+
+
+    }
+
+    private final int capacity;
+    private int minFreq;
+    private final Map<Integer, Node> keyMap;
+    private final Map<Integer, DLL> freqMap;
+
     public LFUCache(int capacity) {
-        // TODO: capacity, keyToNode, freqToList, minFreq, size 초기화
+        this.capacity = capacity;
+        this.keyMap = new HashMap<>();
+        this.freqMap = new HashMap<>();
+        this.minFreq =0;
     }
 
     public int get(int key) {
-        // TODO
-        return -1;
+        Node node = keyMap.get(key);
+        if(node == null) return -1;
+        increaseFreq(node);
+        return node.value;
     }
 
     public void put(int key, int value) {
-        // TODO
+        if(capacity ==0) return;
+        Node node = keyMap.get(key);
+        if(node != null){
+            node.value = value;
+            increaseFreq(node);
+        }else{
+            if(keyMap.size() >= capacity) evict();
+            Node newNode = new Node(key, value);
+            keyMap.put(key, newNode);
+            freqMap.computeIfAbsent(1, k-> new DLL()).addToHead(newNode);
+            minFreq = 1;
+        }
+    }
+
+    private void increaseFreq(Node node){
+        DLL oldDll = freqMap.get(node.freq);
+        oldDll.removeNode(node);
+        if(node.freq == minFreq && oldDll.size ==0) minFreq ++;
+        node.freq ++;
+        freqMap.computeIfAbsent(node.freq, k -> new DLL()).addToHead(node);
+    }
+
+    private void evict(){
+        DLL oldDll = freqMap.get(minFreq);
+        Node lru = oldDll.removeTail();
+        keyMap.remove(lru.key);
     }
 
     public static void main(String[] args) {

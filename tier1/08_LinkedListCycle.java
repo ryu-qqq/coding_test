@@ -13,11 +13,10 @@
  *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   사이클이 존재하면 fast - slow 의 거리(모듈러 사이클 길이)는 매 스텝마다 1씩 줄어든다.
+ *   (스스로 떠올려볼 것)
  *
  * --- 함정 ---
- *   - fast.next.next 에 NPE 나지 않도록 fast와 fast.next 둘 다 null 체크.
- *   - HashSet으로 방문 체크하는 풀이도 가능하지만 공간 O(N)이라 비효율.
+ *   (스스로 떠올려볼 것)
  */
 class LinkedListCycle {
 
@@ -29,7 +28,15 @@ class LinkedListCycle {
 
     static class Solution {
         public boolean hasCycle(ListNode head) {
-            // TODO
+            if(head == null) return false;
+            ListNode slow = head;
+            ListNode fast = head;
+
+            while(fast != null && fast.next!= null){
+                slow = slow.next;
+                fast = fast.next.next;
+                if(slow == fast ) return true;
+            }
             return false;
         }
     }

@@ -13,12 +13,10 @@
  *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   매 반복 시점에서 dummy.next ~ tail 까지는 정렬된 상태로 유지된다.
+ *   (스스로 떠올려볼 것)
  *
  * --- 함정 ---
- *   - 마지막에 남은 리스트를 그대로 이어주는 것을 잊으면 안 된다.
- *   - 한쪽이 null인 경우 그대로 다른 쪽을 반환.
- *   - 동일 값일 때 안정 정렬을 원한다면 <= 사용 (l1 우선).
+ *   (스스로 떠올려볼 것)
  */
 class MergeTwoSortedLists {
 
@@ -30,8 +28,26 @@ class MergeTwoSortedLists {
 
     static class Solution {
         public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-            // TODO
-            return null;
+            ListNode dummy = new ListNode(0);
+            ListNode tail = dummy;
+
+            // 1 2 3
+            // 4 5 7
+
+            while(l1 != null && l2 != null){
+                if(l1.val <= l2.val){
+                    tail.next = l1;
+                    l1 = l1.next;
+                } else{
+                    tail.next = l2;
+                    l2= l2.next;
+                }
+
+                tail = tail.next;
+            }
+
+            tail.next = (l1 != null) ? l1 : l2;
+            return dummy.next;
         }
     }
 

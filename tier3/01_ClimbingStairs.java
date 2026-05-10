@@ -13,18 +13,25 @@
  *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   매 반복 직전 prev2 = f(i-2), prev1 = f(i-1).
+ *   (스스로 떠올려볼 것)
  *
  * --- 함정 ---
- *   - n=1, n=2 같은 base case 분기 처리.
- *   - n이 매우 커도 int 안에 들어가는지(LC는 n <= 45 정도) 확인.
+ *   (스스로 떠올려볼 것)
  */
 class ClimbingStairs {
 
     static class Solution {
         public int climbStairs(int n) {
-            // TODO: 피보나치 점화식, 두 변수 rolling
-            return 0;
+            if (n <= 2) return n;
+            int prev2 = 1;
+            int prev1 = 2;
+            for(int i =3; i<=n; i ++){
+                int cur = prev1 + prev2;
+                prev2 = prev1;
+                prev1 = cur;
+            }
+
+            return prev1;
         }
     }
 

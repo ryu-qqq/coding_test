@@ -13,11 +13,10 @@
  *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   매 반복 직후, prev는 지금까지 뒤집힌 부분 리스트의 head.
+ *   (스스로 떠올려볼 것)
  *
  * --- 함정 ---
- *   - curr.next를 먼저 저장하지 않으면 다음으로 갈 수 없다.
- *   - 마지막에 head.next = null 처리를 잊으면 사이클 발생 가능 (재귀 버전).
+ *   (스스로 떠올려볼 것)
  */
 class ReverseLinkedList {
 
@@ -29,8 +28,27 @@ class ReverseLinkedList {
 
     static class Solution {
         public ListNode reverseList(ListNode head) {
-            // TODO
-            return null;
+            ListNode prev = null;
+            ListNode curr = head;
+            
+            //null -> 1
+            //1 -> 2
+            //2 -> 3
+
+
+            //3 -> 2
+            //2 -> 1
+            //1 -> null
+
+            
+            while(curr != null){
+                ListNode next = curr.next;
+                curr.next = prev;
+                prev = curr;
+                curr = next;
+            }
+
+            return prev;
         }
     }
 

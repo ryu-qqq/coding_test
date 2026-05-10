@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * LeetCode 322 - Coin Change
  *
@@ -14,19 +16,28 @@
  *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   dp[a]가 채워진 시점에서, 그 값은 "지금까지 고려한 동전들로 a를 만드는 최소 개수".
+ *   (스스로 떠올려볼 것)
  *
  * --- 함정 ---
- *   - 초기 dp 값을 Integer.MAX_VALUE로 두면 +1 시 오버플로우. amount+1로 두는 것이 안전.
- *   - amount == 0이면 0 반환.
- *   - 동전이 비어있어도 amount==0이면 0이어야 함.
+ *   (스스로 떠올려볼 것)
  */
 class CoinChange {
 
     static class Solution {
         public int coinChange(int[] coins, int amount) {
-            // TODO: bottom-up DP, dp[a] = min 동전 수
-            return -1;
+            int[] dp = new int[amount + 1];
+            Arrays.fill(dp, amount + 1);
+            dp[0] = 0;
+
+            for(int i =1; i <=amount; i ++){
+                for(int c : coins){
+                    if(i-c>=0){
+                        dp[i] = Math.min(dp[i], dp[i-c] + 1);
+                    }
+                }
+            }
+
+            return dp[amount] > amount ? - 1 : dp[amount];
         }
     }
 

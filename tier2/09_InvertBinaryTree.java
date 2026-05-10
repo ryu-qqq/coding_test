@@ -13,11 +13,10 @@
  *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   재귀 종료 시 해당 서브트리는 좌우 거울 상태가 되어 있다.
+ *   (스스로 떠올려볼 것)
  *
  * --- 함정 ---
- *   - swap 전에 left/right 둘 중 하나를 임시 변수로 잡지 않으면 덮어써져 잘못 swap 된다.
- *   - 빈 트리 입력 처리.
+ *   (스스로 떠올려볼 것)
  */
 class InvertBinaryTree {
 
@@ -29,10 +28,22 @@ class InvertBinaryTree {
 
     static class Solution {
         public TreeNode invertTree(TreeNode root) {
-            // TODO
-            return null;
+            if(root != null){
+                swap(root);
+                invertTree(root.left);
+                invertTree(root.right);
+            }
+
+            return root;
         }
     }
+
+    public static void swap(TreeNode root){
+        TreeNode temp = root.left;
+        root.left = root.right;
+        root.right = temp;
+    }
+
 
     // 헬퍼: 트리를 in-order로 직렬화 (테스트 비교용)
     private static String inorder(TreeNode root) {

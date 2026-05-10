@@ -1,5 +1,5 @@
 import java.util.PriorityQueue;
-
+import java.util.*;
 /**
  * LeetCode 295 - Find Median from Data Stream
  *
@@ -18,13 +18,10 @@ import java.util.PriorityQueue;
  *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   - lo의 모든 원소 ≤ hi의 모든 원소.
- *   - lo.size() == hi.size() (짝수개) 또는 lo.size() == hi.size()+1 (홀수개).
+ *   (스스로 떠올려볼 것)
  *
  * --- 함정 ---
- *   - PriorityQueue는 기본 min-heap → 최대 힙은 Comparator.reverseOrder() 또는 (a,b) -> b-a.
- *   - 정수 합 / 2 시 오버플로우 주의 → double로 캐스팅.
- *   - findMedian이 비어있는 경우는 LC에서 호출되지 않음.
+ *   (스스로 떠올려볼 것)
  */
 class FindMedianFromStream {
 
@@ -32,18 +29,30 @@ class FindMedianFromStream {
     private final PriorityQueue<Integer> hi;  // 최소 힙
 
     public FindMedianFromStream() {
-        this.lo = new PriorityQueue<>((a, b) -> b - a);
+        this.lo = new PriorityQueue<>(Comparator.reverseOrder());
         this.hi = new PriorityQueue<>();
-        // TODO: 필요시 추가 초기화
     }
 
     public void addNum(int num) {
-        // TODO
+        if(lo.isEmpty() || num <= lo.peek()){
+            lo.offer(num);
+        }else{
+            hi.offer(num);
+        }
+
+        if(lo.size() > hi.size() + 1){
+            hi.offer(lo.poll());
+        }else if(hi.size() > lo.size()){
+            lo.offer(hi.poll());
+        }
+        
     }
 
     public double findMedian() {
-        // TODO
-        return 0.0;
+        if(lo.size() == hi.size()){
+            return (lo.peek() + hi.peek()) / 2.0;
+        }
+        return lo.peek();
     }
 
     public static void main(String[] args) {

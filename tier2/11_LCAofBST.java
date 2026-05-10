@@ -13,11 +13,10 @@
  *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   루프 진입 시점의 root는 "p, q를 모두 포함하는 가장 낮은 가능 후보"이다.
+ *   (스스로 떠올려볼 것)
  *
  * --- 함정 ---
- *   - 일반 이진트리 LCA(LC 236)와 다르다는 점 유의 (BST 성질 활용 필수).
- *   - p, q가 같은 노드인 경우 그 노드 자체가 LCA.
+ *   (스스로 떠올려볼 것)
  */
 class LCAofBST {
 
@@ -29,8 +28,18 @@ class LCAofBST {
 
     static class Solution {
         public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-            // TODO
-            return null;
+                TreeNode cur = root;
+
+                while(cur != null){
+                    if(p.val < cur.val && q.val < cur.val){
+                        cur = cur.left;
+                    }else if(p.val > cur.val && q.val > cur.val){
+                        cur = cur.right;
+                    }else{
+                        return cur;
+                    }
+                }
+                return null;
         }
     }
 

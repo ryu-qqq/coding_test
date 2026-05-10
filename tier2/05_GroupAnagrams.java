@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -18,18 +20,26 @@ import java.util.List;
  *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   매 반복 후 map[key]에 들어 있는 문자열들은 모두 서로 애너그램.
+ *   (스스로 떠올려볼 것)
  *
  * --- 함정 ---
- *   - 빈 문자열도 그 자체로 하나의 그룹.
- *   - 결과 그룹의 순서나 그룹 내부 순서는 LeetCode에선 임의로 허용.
+ *   (스스로 떠올려볼 것)
  */
 class GroupAnagrams {
 
     static class Solution {
         public List<List<String>> groupAnagrams(String[] strs) {
-            // TODO: 정렬한 키 또는 26-length 카운트 키로 그룹핑
-            return new ArrayList<>();
+            HashMap<String, List<String>> map = new HashMap<>();
+
+            for(String s : strs){
+                char[] chars = s.toCharArray();
+                Arrays.sort(chars);
+                String word = new String(chars);
+
+                map.computeIfAbsent(word, w -> new ArrayList<>()).add(s);
+            }
+
+            return new ArrayList<>(map.values());
         }
     }
 

@@ -1,3 +1,6 @@
+import java.util.ArrayDeque;
+import java.util.Queue;
+
 /**
  * LeetCode 994 - Rotting Oranges
  *
@@ -16,20 +19,54 @@
  *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   매 레벨 시작 시 큐에는 정확히 "지금 막 썩기 시작한 오렌지들"만 있다.
+ *   (스스로 떠올려볼 것)
  *
  * --- 함정 ---
- *   - 시작부터 신선 오렌지가 0이면 시간은 0 (분 증가 전에 종료).
- *   - 마지막 레벨에서 분이 1만큼 더 증가하지 않도록 큐가 비어있을 때 증가 X 처리.
- *     보통 "큐를 한 번 비웠을 때만 분 증가" 형태로 구현.
- *   - 격리되어 도달 불가능한 신선 오렌지가 있으면 -1.
+ *   (스스로 떠올려볼 것)
  */
 class RottingOranges {
 
+    static int rows;
+    static int cols;
+    static int freshCnt;
+
     static class Solution {
         public int orangesRotting(int[][] grid) {
-            // TODO: 다중 출발 BFS
-            return -1;
+            rows = grid.length;
+            cols = grid[0].length;
+            Queue<int[]> q = new ArrayDeque<>();
+
+            for(int i =0; i<rows; i ++){
+                for(int j =0; j <cols; j ++){
+                    if(grid[i][j] == 1) freshCnt++;
+                    if(grid[i][j] == 2) q.offer(new int[]{i, j});
+                }
+            }
+
+            if(freshCnt ==0) return 0;
+            int min =0;
+            int[][] dir = {{-1,0}, {1,0}, {0, -1}, {0, 1}};
+
+            while(!q.isEmpty() && freshCnt > 0){
+                int size = q.size();
+
+                for(int i =0; i< size; i ++){
+                    int[] cur = q.poll();
+                    for(int[] d : dir){
+                        int curX = cur[0] + d[0];
+                        int curY = cur[1] + d[1];
+                        if(curX >=0 && curY >=0 && curX < rows && curY < cols && grid[curX][curY] == 1){
+                            grid[curX][curY] = 2;
+                            freshCnt --;   
+                            q.offer(new int[]{curX, curY});
+                        }
+                    }
+                }
+
+                min++;
+            }
+
+            return freshCnt == 0 ? min : -1;;
         }
     }
 

@@ -19,13 +19,10 @@ import java.util.PriorityQueue;
  *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   add 종료 직후 heap.size() == min(k, 지금까지 들어온 원소 수).
- *   힙에는 "현재 시점에서 가장 큰 K개의 값"이 들어 있다.
+ *   (스스로 떠올려볼 것)
  *
  * --- 함정 ---
- *   - max-heap을 쓰고 매번 K-1개를 빼는 방식은 비효율(O(K log N)).
- *   - 초기 nums에 K보다 적은 값이 들어올 수도 있음 → 호출 시 size 체크 필요.
- *   - PriorityQueue는 기본이 min-heap (자연 순서) 임을 기억.
+ *   (스스로 떠올려볼 것)
  */
 class KthLargest {
 
@@ -35,12 +32,15 @@ class KthLargest {
     public KthLargest(int k, int[] nums) {
         this.k = k;
         this.heap = new PriorityQueue<>();
-        // TODO: nums의 모든 값을 add 한다.
+        for(int i : nums){
+            add(i);
+        }
     }
 
     public int add(int val) {
-        // TODO
-        return -1;
+        heap.offer(val);
+        if(heap.size() > k) heap.poll();
+        return heap.peek();
     }
 
     public static void main(String[] args) {

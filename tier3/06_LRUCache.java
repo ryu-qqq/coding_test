@@ -1,3 +1,4 @@
+import java.util.*;
 /**
  * LeetCode 146 - LRU Cache
  *
@@ -14,34 +15,98 @@
  *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   - map.size() <= capacity
- *   - DLL의 노드 집합 == map의 value 집합
- *   - head 쪽이 가장 최근, tail 쪽이 가장 오래됨
+ *   (스스로 떠올려볼 것)
  *
  * --- 핵심 트릭 ---
- *   eviction 시 map에서도 지워야 하므로 Node에 반드시 key를 저장!
+ *   (스스로 떠올려볼 것)
  *
  * --- 왜 DLL인가? ---
- *   - 임의 노드 제거가 O(1) (prev/next 포인터로 즉시 우회)
- *   - 단방향 리스트는 prev를 모르므로 O(n) 검색 필요
+ *   (스스로 떠올려볼 것)
  *
  * --- 대안 ---
- *   LinkedHashMap을 쓰면 한 줄로 가능하지만, 면접에선 직접 구현이 출제됨.
+ *   (스스로 떠올려볼 것)
  */
 class LRUCache {
 
+    static class Node{
+        int key, value;
+        Node prev, next;
+
+        Node(int k, int v){
+            key =k;
+            value =v;
+        }
+    }
+
+    private final int capacity;
+    private final Map<Integer, Node> map;
+    private final Node head;
+    private final Node tail;
+
+
     public LRUCache(int capacity) {
+        this.capacity = capacity;
+        this.map = new HashMap<>();
+        this.head = new Node(0, 0);
+        this.tail = new Node(0, 0);
+        head.next = tail;
+        tail.prev = head;
         // TODO: capacity 저장, HashMap, dummy head/tail 노드 초기화
     }
 
     public int get(int key) {
-        // TODO
-        return -1;
+        Node node = map.get(key);
+        if(node ==null) return -1;
+        moveToHead(node);
+        return node.value;
     }
 
     public void put(int key, int value) {
-        // TODO
+        Node node = map.get(key);
+        if(node != null){
+            node.value = value;
+            moveToHead(node);
+        }else{
+            Node newNode = new Node(key, value);
+            map.put(key, newNode);
+            addToHead(newNode);
+            if(map.size() > capacity){
+                Node lru = removeTail();
+                map.remove(lru.key);
+            }
+        }
     }
+
+    private void addToHead(Node node) {
+        Node frontNode = head.next;
+        
+        node.prev = head;
+        node.next = frontNode;
+
+        frontNode.prev = node;
+        head.next = node;
+    }
+                                                                  
+    private void removeNode(Node node) {
+        Node prevNode = node.prev;
+        Node nextNode = node.next;
+
+        prevNode.next = nextNode;
+        nextNode.prev = prevNode;
+
+    }
+    
+    private void moveToHead(Node node) {
+        removeNode(node);
+        addToHead(node);
+    }                                                                                                                                                                      
+    
+    private Node removeTail() {
+        Node lru = tail.prev;
+        removeNode(lru);
+        return lru;
+    }
+
 
     public static void main(String[] args) {
         // 시나리오 1: 기본

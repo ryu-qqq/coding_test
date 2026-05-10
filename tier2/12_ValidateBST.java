@@ -16,13 +16,10 @@
  *   (스스로 떠올려볼 것)
  *
  * --- 불변식 ---
- *   범위 방식: 재귀 진입 시 node의 값은 (lower, upper) 범위 안에 들어야 한다.
+ *   (스스로 떠올려볼 것)
  *
  * --- 함정 ---
- *   - 단순히 node.left.val < node.val, node.right.val > node.val 만 체크하면
- *     서브트리 전체 조건을 놓친다(예: 5의 왼쪽 서브트리에 6이 끼는 경우).
- *   - 값 범위가 Integer.MIN_VALUE / MAX_VALUE 까지 올 수 있어 long을 쓰거나
- *     Long/null 박싱을 권장.
+ *   (스스로 떠올려볼 것)
  */
 class ValidateBST {
 
@@ -34,9 +31,25 @@ class ValidateBST {
 
     static class Solution {
         public boolean isValidBST(TreeNode root) {
-            // TODO: 범위 기반 재귀 또는 in-order 비교
-            return false;
+            return validate(root, Long.MIN_VALUE, Long.MAX_VALUE);
         }
+    }
+
+    static boolean validate(TreeNode root, long min, long max){
+        if(root == null) return true;
+        if(root.val <= min || root.val >= max) return false;
+        
+        return validate(root.left, min, root.val)
+            && validate(root.right, root.val, max);
+    }
+    static TreeNode prev = null;
+    static boolean inOrder(TreeNode root){
+        if(root == null) return true;
+        if(!inOrder(root.left)) return false;
+        if(prev != null && prev.val >= root.val) return false;
+        prev = root;
+        
+        return inOrder(root.right);
     }
 
     public static void main(String[] args) {
