@@ -28,9 +28,21 @@ class InvertBinaryTree {
 
     static class Solution {
         public TreeNode invertTree(TreeNode root) {
-            // TODO
-            return null;
+            if(root == null) return null;
+            
+            TreeNode left = invertTree(root.left);
+            TreeNode right = invertTree(root.right);
+            root.right = left;
+            root.left = right;
+            return root;
         }
+    }
+
+    static void swap(TreeNode root){
+        TreeNode temp = root.left;
+        root.left = root.right;
+        root.right = temp;
+
     }
 
     // 헬퍼: 트리를 in-order로 직렬화 (테스트 비교용)

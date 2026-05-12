@@ -1,3 +1,5 @@
+import java.util.*;
+
 /**
  * LeetCode 994 - Rotting Oranges
  *
@@ -24,9 +26,49 @@
 class RottingOranges {
 
     static class Solution {
+
+        static int[][] xy = {{-1,0}, {1,0}, {0, 1}, {0, -1}};
+
         public int orangesRotting(int[][] grid) {
-            // TODO: 다중 출발 BFS
-            return -1;
+            int cols = grid.length;
+            int rows = grid[0].length;
+            int fresh =0;
+            int minutes = 0;
+
+            Deque<int[]> q = new ArrayDeque<>();
+
+            for(int i =0; i < cols; i ++){
+                for(int j =0; j < rows; j ++){
+                    if(grid[i][j] == 2){
+                        q.offer(new int[]{i, j});
+                    }else if(grid[i][j] == 1){
+                        fresh++;
+                    }
+                }
+            }
+
+            if(fresh ==0) return 0;
+
+            while(!q.isEmpty()){
+                int size = q.size();
+                for(int i =0; i < size; i ++){
+                    int[] cur = q.poll();
+
+                    for(int[] arr : xy){
+                        int curX = arr[0] + cur[0];
+                        int curY = arr[1] + cur[1];
+    
+                        if(curX >=0 && curY >= 0 && curX < cols && curY < rows && grid[curX][curY] == 1){
+                            q.offer(new int[]{curX, curY});
+                            grid[curX][curY] = 2;
+                            fresh--;
+                        }
+                    }
+                }
+                minutes ++;
+            }
+
+            return fresh == 0 ? minutes - 1 : -1;
         }
     }
 

@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -27,8 +29,18 @@ class GroupAnagrams {
 
     static class Solution {
         public List<List<String>> groupAnagrams(String[] strs) {
-            // TODO: 정렬한 키 또는 26-length 카운트 키로 그룹핑
-            return new ArrayList<>();
+            
+            HashMap<String, List<String>> map = new HashMap<>();
+            for(String str : strs){
+                char[] arr = str.toCharArray();
+                Arrays.sort(arr);
+                
+                String word = String.valueOf(str);
+
+                map.computeIfAbsent(word, w -> new ArrayList<>()).add(word);
+            }
+
+            return List.copyOf(map.values());
         }
     }
 

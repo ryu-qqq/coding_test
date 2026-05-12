@@ -1,22 +1,23 @@
 /**
  * LeetCode 206 - Reverse Linked List
  *
- * 문제: 단일 연결 리스트를 뒤집어 새로운 head를 반환한다.
+ * 야 이거 답이뭐냐 ;; 왜케 헷가릴지 스왑하는게 너무 헷갈려
  *
- * --- 인터페이스 ---
- *   ListNode reverseList(ListNode head)
+ * 단일 연결리스트 뒤집기 (반복문 O(1) 공간버전)
+ * 
+ * [핵심]
+ * - 현재 노드(cur)에서 next를 따라가다 보면 기존 연결방향을 잃어버리니까 "다음 노드(next)"를 백업해둬야 함
+ * - 방향을 바꿀 때는: cur.next = prev; // 여기서 진짜 연결 '역전' 발생!
+ * - prev, cur, next 세 포인터를 한칸씩 밀면서 반복
+ * 
+ * - 최종적으로 prev가 새로운 head가 된다(cur=null로 끝났으니까)
  *
- * --- 시간복잡도 목표 ---
- *   시간 O(N), 공간 O(1) (반복문 버전)
- *
- * --- 핵심 아이디어 ---
- *   (스스로 떠올려볼 것)
- *
- * --- 불변식 ---
- *   (스스로 떠올려볼 것)
- *
- * --- 함정 ---
- *   (스스로 떠올려볼 것)
+ * 손으로 1→2→3 따라가면:
+ *   0) prev=null, cur=1
+ *   1) next=2, 1.next=null, prev=1, cur=2
+ *   2) next=3, 2.next=1,    prev=2, cur=3
+ *   3) next=null, 3.next=2, prev=3, cur=null
+ *   ==> prev(3) return!
  */
 class ReverseLinkedList {
 
@@ -25,11 +26,25 @@ class ReverseLinkedList {
         ListNode next;
         ListNode(int v) { val = v; }
     }
-
+    // head
+    //  a -> b -> c
+    //  
     static class Solution {
         public ListNode reverseList(ListNode head) {
-            // TODO
-            return null;
+            ListNode prev = null;
+            ListNode cur = head;
+
+            while(cur != null){
+                //b
+                ListNode next = cur.next;
+                // a 의 이전을 null 바꿈
+                cur.next = prev;
+                // 전을 a
+                prev =cur;
+                cur = next;
+            }
+
+            return prev;
         }
     }
 

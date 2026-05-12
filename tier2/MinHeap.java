@@ -87,12 +87,8 @@ public class MinHeap {
             arr[smallest] = temp;
 
             i = smallest;
-        }
-        
-
+        }    
     }
-
-    
 
     public int peek(){
         return arr[0];

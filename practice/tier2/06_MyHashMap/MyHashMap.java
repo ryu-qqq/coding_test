@@ -1,3 +1,9 @@
+import java.util.ArrayDeque;
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.Iterator;
+import java.util.LinkedList;
+
 /**
  * LeetCode 706 - Design HashMap
  *
@@ -22,21 +28,55 @@
  */
 class MyHashMap {
 
+    private final static int SIZE  = 1024;
+    private Deque<int[]>[] buckets;
+
     public MyHashMap() {
-        // TODO: 버킷 배열 초기화 (예: capacity = 769 또는 1024)
+        buckets = new ArrayDeque[SIZE];
+        for(int i =0; i <SIZE; i ++){
+            buckets[i] = new ArrayDeque<>();
+        }
     }
 
     public void put(int key, int value) {
-        // TODO
+
+        int idx = key % SIZE;
+        for(int[] arr : buckets[idx]){
+            if(arr[0] == key){
+                arr[1] = value;
+                return;
+            }
+        }
+
+        buckets[idx].add(new int[]{key, value});
+        
     }
 
     public int get(int key) {
-        // TODO
+        int idx = key % SIZE;
+        for(int[] arr : buckets[idx]){
+            if(arr[0] == key){
+                return arr[1];
+            }
+        }
+
         return -1;
     }
 
     public void remove(int key) {
-        // TODO
+        int idx = key % SIZE;
+        Iterator<int[]> it = buckets[idx].iterator();
+        while(it.hasNext()){
+            int[] arr = it.next();
+            if(arr[0] == key){
+                it.remove();
+                return;
+            }
+            
+            
+        }
+        
+
     }
 
     public static void main(String[] args) {

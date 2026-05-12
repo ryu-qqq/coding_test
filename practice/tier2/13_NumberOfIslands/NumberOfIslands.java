@@ -1,3 +1,6 @@
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 /**
  * LeetCode 200 - Number of Islands
  *
@@ -22,10 +25,50 @@
 class NumberOfIslands {
 
     static class Solution {
+
+        static final int[][] xy = {{-1,0}, {1,0}, {0, 1}, {0,-1}};
+        static int cols, rows;
+
         public int numIslands(char[][] grid) {
-            // TODO: 모든 셀을 순회하며 '1' 만나면 DFS/BFS로 가라앉히고 count++
-            return 0;
+            if (grid == null || grid.length == 0) return 0;
+            int cnt = 0;
+            cols = grid.length;
+            rows = grid[0].length;
+
+            for(int i =0; i <cols; i ++){
+                for(int j =0; j<rows; j ++){
+                    if(grid[i][j] == '1'){
+                        cnt++;
+                        bfs(grid, i, j);
+                    }
+                }
+            }
+            return cnt;
         }
+
+        void bfs(char[][] grid, int i, int j) {
+
+            Deque<int[]>  q = new ArrayDeque<>();
+            q.offer(new int[]{i, j});
+            grid[i][j] = '0';
+
+            while (!q.isEmpty()) {
+                int[] cur = q.poll();
+
+                for(int[] ar : xy){
+                    int curX = ar[0] + cur[0];
+                    int curY = ar[1] + cur [1];
+
+                    if(curX >=0 && curX < cols & curY >=0 && curY < rows && grid[curX][curY] == '1'){
+                        q.offer(new int[]{curX, curY});
+                        grid[curX][curY] = '0';
+                    }
+                }
+            }
+
+        }
+
+
     }
 
     public static void main(String[] args) {

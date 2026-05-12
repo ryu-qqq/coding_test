@@ -23,8 +23,17 @@ class BestTimeBuySell {
 
     static class Solution {
         public int maxProfit(int[] prices) {
-            // TODO: 단일 패스, minPrice 추적
-            return 0;
+
+            int bestProfit = Integer.MIN_VALUE;
+            int minPrice =Integer.MAX_VALUE;
+
+            for(int price : prices){
+                minPrice = Math.min(minPrice, price);
+                bestProfit = Math.max(bestProfit, price - minPrice);
+            }
+            
+        
+            return bestProfit > 0 ? bestProfit : 0;
         }
     }
 
