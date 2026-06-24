@@ -12,7 +12,7 @@
 | 02 | ParkingLot | ★★★★ | 요금 정책, 자리 배정 |
 | 03 | ContractManager | ★★★ | 상태(enum) 전이 규칙 |
 | 04 | ProfitSharing | ★★★ | 정산 규칙, 반올림 처리 |
-| 05 | MeetingRoomBooking | ★★★★ | 여러 방 구간 예약, 겹침 판정 (빌드블록 실제 출제) |
+| 05 | MeetingRoomBooking | ★★★★ | 여러 방 구간 예약, 겹침 판정 |
 
 ## 핵심 학습 포인트
 

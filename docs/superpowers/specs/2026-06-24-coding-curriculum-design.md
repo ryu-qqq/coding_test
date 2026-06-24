@@ -98,7 +98,7 @@ coding-curriculum 루트/
 ### Ch3 — 실무 기준 설계형 (5)
 - CurrencyExchange(환전 — 정책 분리), ParkingLot(주차장 — 요금), ContractManager(계약 — 상태),
   ProfitSharing(정산)
-- **MeetingRoomBooking(미팅룸 예약)** — 빌드블록 실제 출제 문제. 신규 작성.
+- **MeetingRoomBooking(미팅룸 예약)** — 신규 작성 문제.
   - 동작: 여러 방 중 빈 방에 시간 구간 예약. 모든 방이 그 시간에 겹치면 거절.
   - 시간 표현: 당일 기준 `"HH:MM"` 문자열 → 분 단위 int 변환.
   - 인터페이스: `MeetingRoomBooking(int roomCount)` → `int book(String start, String end)`
@@ -140,5 +140,5 @@ coding-curriculum 루트/
 
 - 별도 solutions 브랜치 / 자동 채점 CI / 테스트 러너 프레임워크 — 만들지 않음.
 - 새 문제 추가 — 이번 작업은 **기존 풀이의 재편성**에 한정.
-  예외: `MeetingRoomBooking` 1문제만 신규 작성(빌드블록 실제 출제, Ch3 보강).
+  예외: `MeetingRoomBooking` 1문제만 신규 작성(Ch3 보강).
 - 무관한 리팩터링 — 정답 코드 로직은 건드리지 않고 배치/골격화만.
