@@ -2,3 +2,9 @@ out/
 *.class
 .idea/
 *.iml
+
+# 개인 학습자료 (강의 PDF 등 대용량) — 레포에 올리지 않음
+_personal/java-lectures/
+
+# MCP 잔여물
+.playwright-mcp/
