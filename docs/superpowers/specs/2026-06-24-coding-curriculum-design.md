@@ -95,11 +95,19 @@ coding-curriculum 루트/
 - **문자열(카카오형)**: 신규아이디추천, 신고결과받기, 튜플, 문자열압축, 제이든케이스,
   오픈채팅방, 내맘대로정렬하기
 
-### Ch3 — 실무 기준 설계형 (4)
+### Ch3 — 실무 기준 설계형 (5)
 - CurrencyExchange(환전 — 정책 분리), ParkingLot(주차장 — 요금), ContractManager(계약 — 상태),
   ProfitSharing(정산)
+- **MeetingRoomBooking(미팅룸 예약)** — 빌드블록 실제 출제 문제. 신규 작성.
+  - 동작: 여러 방 중 빈 방에 시간 구간 예약. 모든 방이 그 시간에 겹치면 거절.
+  - 시간 표현: 당일 기준 `"HH:MM"` 문자열 → 분 단위 int 변환.
+  - 인터페이스: `MeetingRoomBooking(int roomCount)` → `int book(String start, String end)`
+    가 배정된 방 번호 반환, 모두 겹치면 `-1`.
+  - 겹침 판정: `[s1,e1)` vs `[s2,e2)` 는 `s1 < e2 && s2 < e1` 일 때 겹침.
+  - 설계 포인트: 시간 파싱 / 방 배정 정책 분리, `appendix/cheatsheets/interval-overlap` 직결.
+  - 취소·조회·최단 빈시간 같은 부가 연산은 없음(단순 예약만).
 
-총 ~50문제.
+총 ~51문제.
 
 ### 경계 판단 (확정)
 - `InsertDeleteGetRandom(LC380)` → 디자인이지만 알고리즘 성격이 강해 **Ch2**.
@@ -132,4 +140,5 @@ coding-curriculum 루트/
 
 - 별도 solutions 브랜치 / 자동 채점 CI / 테스트 러너 프레임워크 — 만들지 않음.
 - 새 문제 추가 — 이번 작업은 **기존 풀이의 재편성**에 한정.
+  예외: `MeetingRoomBooking` 1문제만 신규 작성(빌드블록 실제 출제, Ch3 보강).
 - 무관한 리팩터링 — 정답 코드 로직은 건드리지 않고 배치/골격화만.
